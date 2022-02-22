@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type ButtonBaseProps = {
   onPress: (event: GestureResponderEvent) => void;
+  rippleRadius?: number;
 };
 
 type ButtonWithTitle = ButtonBaseProps & {
@@ -39,6 +40,7 @@ export const Button = ({
   onPress,
   children,
   title,
+  rippleRadius
 }: ButtonWithChildren | ButtonWithTitle) => {
   const styles = useStyles();
 
@@ -47,6 +49,7 @@ export const Button = ({
       pressColor="white"
       style={styles.container}
       onPress={onPress}
+      android_ripple={{radius: rippleRadius}}
     >
       {title && <Text style={styles.title}>{title}</Text>}
       {children}
