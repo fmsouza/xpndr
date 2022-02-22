@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import theme from '~/shared/theme';
+import {theme} from '~/shared/theme';
 import { ScreenType } from '~/shared/navigation';
 import * as Home from '~/home/screens';
 
@@ -22,7 +22,7 @@ const SCREEN_OPTIONS = {
 
 export const App = () => (
   <NavigationContainer theme={theme}>
-    <StatusBar {...(theme.statusBar as any)} />
+    <StatusBar {...(theme.statusBar)} />
     <Stack.Navigator
       initialRouteName={initialScreen}
       screenOptions={SCREEN_OPTIONS}

@@ -1,3 +1,4 @@
+import { PlatformPressable } from '@react-navigation/elements';
 import React, { ReactNode } from 'react';
 import { GestureResponderEvent, Pressable, Text } from 'react-native';
 import { makeStyles, Theme } from '~/shared/styles';
@@ -20,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type ButtonBaseProps = {
   onPress: (event: GestureResponderEvent) => void;
-  rippleRadius?: number;
 };
 
 type ButtonWithTitle = ButtonBaseProps & {
@@ -39,24 +39,17 @@ export const Button = ({
   onPress,
   children,
   title,
-  rippleRadius = 40,
 }: ButtonWithChildren | ButtonWithTitle) => {
   const styles = useStyles();
 
-  const rippleConfig = {
-    color: 'white',
-    borderless: true,
-    radius: rippleRadius,
-  };
-
   return (
-    <Pressable
+    <PlatformPressable
+      pressColor="white"
       style={styles.container}
       onPress={onPress}
-      android_ripple={rippleConfig}
     >
       {title && <Text style={styles.title}>{title}</Text>}
       {children}
-    </Pressable>
+    </PlatformPressable>
   );
 };

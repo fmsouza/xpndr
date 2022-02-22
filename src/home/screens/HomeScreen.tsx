@@ -1,14 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button, Container, IconButton } from '~/shared/components';
 import { makeStyles, Theme } from '~/shared/styles';
-
-import React from 'react';
+import { useNavigationOptions } from '~/shared/navigation';
 
 import { SecondScreen } from './SecondScreen';
-import { useNavigationOptions } from '~/shared/navigation';
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
