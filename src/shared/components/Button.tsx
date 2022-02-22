@@ -1,6 +1,6 @@
 import { PlatformPressable } from '@react-navigation/elements';
 import React, { ReactNode } from 'react';
-import { GestureResponderEvent, Pressable, Text } from 'react-native';
+import { GestureResponderEvent, StyleSheet, Text } from 'react-native';
 import { makeStyles, Theme } from '~/shared/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -9,19 +9,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: theme.dimensions.padding * 2,
+    paddingVertical: theme.dimensions.padding,
     backgroundColor: theme.colors.primary,
-    borderRadius: 4,
+    borderRadius: theme.dimensions.radius,
   },
-  rightHeaderContainer: {
-    marginRight: 10,
+  fullWidth: {
+    width: '100%',
   },
 }));
 
 type ButtonBaseProps = {
   onPress: (event: GestureResponderEvent) => void;
   rippleRadius?: number;
+  fullWidth?: boolean;
 };
 
 type ButtonWithTitle = ButtonBaseProps & {
@@ -40,16 +41,20 @@ export const Button = ({
   onPress,
   children,
   title,
-  rippleRadius
+  rippleRadius,
+  fullWidth,
 }: ButtonWithChildren | ButtonWithTitle) => {
   const styles = useStyles();
 
   return (
     <PlatformPressable
       pressColor="white"
-      style={styles.container}
+      style={StyleSheet.flatten([
+        styles.container,
+        fullWidth && styles.fullWidth,
+      ])}
       onPress={onPress}
-      android_ripple={{radius: rippleRadius}}
+      android_ripple={{ radius: rippleRadius }}
     >
       {title && <Text style={styles.title}>{title}</Text>}
       {children}

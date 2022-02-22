@@ -6,6 +6,7 @@ import { makeStyles, Theme } from '~/shared/styles';
 const useStyles = makeStyles((theme: Theme) => ({
   safeWrapper: {
     flex: 1,
+    paddingHorizontal: theme.dimensions.padding,
   },
   container: {
     flex: 1,
@@ -18,7 +19,7 @@ type ContainerProps = {
   children: ReactNode;
 };
 
-export const Container = ({ children, style = {} }: ContainerProps) => {
+export const Container = ({ children, style }: ContainerProps) => {
   const styles = useStyles();
   return (
     <SafeAreaView style={styles.safeWrapper}>

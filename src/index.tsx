@@ -1,9 +1,9 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import {theme} from '~/shared/theme';
+import { DarkTheme, LightTheme } from '~/shared/theme';
 import { ScreenType } from '~/shared/navigation';
 import * as Home from '~/home/screens';
 
@@ -20,21 +20,25 @@ const SCREEN_OPTIONS = {
   },
 };
 
-export const App = () => (
-  <NavigationContainer theme={theme}>
-    <StatusBar {...(theme.statusBar)} />
-    <Stack.Navigator
-      initialRouteName={initialScreen}
-      screenOptions={SCREEN_OPTIONS}
-    >
-      {screens.map(screen => (
-        <Stack.Screen
-          key={screen.route}
-          name={screen.route}
-          component={screen}
-          options={{ ...screen.options }}
-        />
-      ))}
-    </Stack.Navigator>
-  </NavigationContainer>
-);
+export const App = () => {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === 'light' ? LightTheme : DarkTheme;
+  return (
+    <NavigationContainer theme={theme}>
+      <StatusBar {...theme.statusBar} />
+      <Stack.Navigator
+        initialRouteName={initialScreen}
+        screenOptions={SCREEN_OPTIONS}
+      >
+        {screens.map(screen => (
+          <Stack.Screen
+            key={screen.route}
+            name={screen.route}
+            component={screen}
+            options={{ ...screen.options }}
+          />
+        ))}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};

@@ -14,9 +14,6 @@ const useStyles = makeStyles((_: Theme) => ({
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
-  rightHeaderContainer: {
-    marginRight: 10,
-  },
 }));
 
 export const HomeScreen = () => {
@@ -41,7 +38,7 @@ export const HomeScreen = () => {
   return (
     <Container style={styles.container}>
       <Text>Count: {count}</Text>
-      <Button title="hello" onPress={handleNextPagePress} />
+      <Button title="hello" onPress={handleNextPagePress} fullWidth />
     </Container>
   );
 };
