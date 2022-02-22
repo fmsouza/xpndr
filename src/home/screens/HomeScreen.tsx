@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Button, Container, IconButton } from '~/shared/components';
+import { Button, Container, IconButton, Text } from '~/shared/components';
 import { makeStyles, Theme } from '~/shared/styles';
 import { useNavigationOptions } from '~/shared/navigation';
 

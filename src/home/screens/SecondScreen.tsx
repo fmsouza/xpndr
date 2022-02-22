@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { makeStyles, Theme } from '~/shared/styles';
-import { Button, Container } from '~/shared/components';
+import { Button, Container, Text } from '~/shared/components';
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
