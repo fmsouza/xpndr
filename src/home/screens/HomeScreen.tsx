@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button, Container, IconButton, Text } from '~/shared/components';
-import { makeStyles, Theme } from '~/shared/styles';
+import { makeStyles, Theme } from '~/shared/theme';
 import { useNavigationOptions } from '~/shared/navigation';
 
 import { SecondScreen } from './SecondScreen';

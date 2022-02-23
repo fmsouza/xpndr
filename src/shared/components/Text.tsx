@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react';
 import { StyleSheet, Text as RNText } from 'react-native';
 
-import { makeStyles, Theme } from '~/shared/styles';
+import { makeStyles, Theme } from '~/shared/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.colors.text,
+    fontSize: theme.text.baseSize
   },
 }));
 

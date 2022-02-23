@@ -1,9 +1,9 @@
 import React from 'react';
-import { StatusBar, useColorScheme } from 'react-native';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { DarkTheme, LightTheme } from '~/shared/theme';
+import { useBaseTheme } from '~/shared/theme';
 import { ScreenType } from '~/shared/navigation';
 import * as Home from '~/home/screens';
 
@@ -13,22 +13,14 @@ const screens: ScreenType[] = [...Object.values(Home)];
 
 const Stack = createNativeStackNavigator();
 
-const SCREEN_OPTIONS = {
-  headerTintColor: '#fff',
-  headerStyle: {
-    backgroundColor: '#074F57',
-  },
-};
-
 export const App = () => {
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === 'light' ? LightTheme : DarkTheme;
+  const theme = useBaseTheme();
   return (
     <NavigationContainer theme={theme}>
       <StatusBar {...theme.statusBar} />
       <Stack.Navigator
         initialRouteName={initialScreen}
-        screenOptions={SCREEN_OPTIONS}
+        screenOptions={{...theme.navbar}}
       >
         {screens.map(screen => (
           <Stack.Screen

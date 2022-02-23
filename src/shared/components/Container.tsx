@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { SafeAreaView, View, StyleSheet } from 'react-native';
 
-import { makeStyles, Theme } from '~/shared/styles';
+import { makeStyles, Theme } from '~/shared/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   safeWrapper: {

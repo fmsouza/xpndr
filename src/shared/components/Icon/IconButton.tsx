@@ -19,7 +19,7 @@ export const IconButton = ({
   color = 'black',
   onPress,
 }: IconButtonProps) => (
-  <Button onPress={onPress} rippleRadius={size * 0.75}>
+  <Button type='ripple-only' onPress={onPress} rippleRadius={size * 0.75}>
     <Icon name={name} size={size} color={color} type={type} />
   </Button>
 );

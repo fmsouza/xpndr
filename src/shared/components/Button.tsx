@@ -1,7 +1,7 @@
 import { PlatformPressable } from '@react-navigation/elements';
 import React, { ReactNode } from 'react';
 import { GestureResponderEvent, StyleSheet, Text } from 'react-native';
-import { makeStyles, Theme } from '~/shared/styles';
+import { makeStyles, Theme } from '~/shared/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -11,18 +11,41 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-evenly',
     paddingHorizontal: theme.dimensions.padding * 2,
     paddingVertical: theme.dimensions.padding,
-    backgroundColor: theme.colors.primary,
     borderRadius: theme.dimensions.radius,
   },
   fullWidth: {
     width: '100%',
   },
+  title: {
+    fontSize: theme.text.baseSize + 2
+  },
+  'button-contained': {
+    backgroundColor: theme.colors.secondary,
+  },
+  'button-contained-text': {
+    color: theme.colors.invertedText,
+  },
+  'button-text': {
+    backgroundColor: 'none',
+  },
+  'button-text-text': {
+    color: theme.colors.text,
+  },
+  'button-outline': {
+    backgroundColor: 'none',
+    borderWidth: theme.dimensions.border,
+    borderColor: theme.colors.secondary
+  },
+  'button-outline-text': {
+    color: theme.colors.secondary,
+  }
 }));
 
 type ButtonBaseProps = {
   onPress: (event: GestureResponderEvent) => void;
   rippleRadius?: number;
   fullWidth?: boolean;
+  type?: 'text' | 'contained' | 'outline' | 'ripple-only';
 };
 
 type ButtonWithTitle = ButtonBaseProps & {
@@ -43,6 +66,7 @@ export const Button = ({
   title,
   rippleRadius,
   fullWidth,
+  type = 'contained'
 }: ButtonWithChildren | ButtonWithTitle) => {
   const styles = useStyles();
 
@@ -52,11 +76,12 @@ export const Button = ({
       style={StyleSheet.flatten([
         styles.container,
         fullWidth && styles.fullWidth,
+        styles[`button-${type}`]
       ])}
       onPress={onPress}
       android_ripple={{ radius: rippleRadius }}
     >
-      {title && <Text style={styles.title}>{title}</Text>}
+      {title && <Text style={StyleSheet.create([styles.title, styles[`button-${type}-text`]])}>{title}</Text>}
       {children}
     </PlatformPressable>
   );

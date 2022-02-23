@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { makeStyles, Theme } from '~/shared/styles';
+import { makeStyles, Theme } from '~/shared/theme';
 import { Button, Container, Text } from '~/shared/components';
 
 const useStyles = makeStyles((_: Theme) => ({
