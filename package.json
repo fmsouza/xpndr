@@ -8,6 +8,8 @@
     "android:logcat": "adb logcat *:S ReactNative:V ReactNativeJS:V",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "upgrade": "react-native upgrade",
+    "clean": "npx react-native-clean-project",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix"
@@ -22,7 +24,7 @@
     "i18n-js": "^3.8.0",
     "lodash": "^4.17.21",
     "react": "17.0.2",
-    "react-native": "0.67.2",
+    "react-native": "0.67.3",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "^3.12.0",
