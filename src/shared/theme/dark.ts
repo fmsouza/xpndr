@@ -9,12 +9,12 @@ import { Theme } from './types';
 import { SharedBaseTheme } from './shared';
 
 const COLORS = merge(RNDarkTheme.colors, {
-  primary: '#004FFF',
-  secondary: '#FF007F',
-  background: '#050505',
-  text: '#FCFCFC',
-  invertedText: '#050505',
-  border: '#FCFCFC',
+  primary: '#000000',
+  secondary: '#FFFFFF',
+  background: '#000000',
+  text: '#FFFFFF',
+  invertedText: '#000000',
+  border: '#FFFFFF',
 });
 
 const STATUS_BAR = {

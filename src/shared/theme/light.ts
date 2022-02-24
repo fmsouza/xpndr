@@ -9,12 +9,12 @@ import { Theme } from './types';
 import { SharedBaseTheme } from './shared';
 
 const COLORS = merge(DefaultTheme.colors, {
-  primary: '#004FFF',
-  secondary: '#FF007F',
-  background: '#FCFCFC',
-  text: '#050505',
-  invertedText: '#FCFCFC',
-  border: '#DDDDDD',
+  primary: '#FFFFFF',
+  secondary: '#000000',
+  background: '#FFFFFF',
+  text: '#000000',
+  invertedText: '#FFFFFF',
+  border: '#666B6A',
 });
 
 const STATUS_BAR = {
