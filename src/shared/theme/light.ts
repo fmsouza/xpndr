@@ -14,6 +14,7 @@ const COLORS = merge(DefaultTheme.colors, {
   background: '#FCFCFC',
   text: '#050505',
   invertedText: '#FCFCFC',
+  border: '#DDDDDD',
 });
 
 const STATUS_BAR = {

@@ -13,6 +13,10 @@ export type Theme = RNTheme & {
     border: string;
     notification: string;
   };
+  viewport: {
+    width: number;
+    height: number;
+  };
   dimensions: {
     padding: number;
     margin: number;

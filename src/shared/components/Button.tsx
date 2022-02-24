@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.colors.text,
   },
   'button-outline': {
-    backgroundColor: 'none',
+    backgroundColor: theme.colors.background,
     borderWidth: theme.dimensions.border,
     borderColor: theme.colors.secondary
   },

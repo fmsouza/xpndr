@@ -14,6 +14,7 @@ const COLORS = merge(RNDarkTheme.colors, {
   background: '#050505',
   text: '#FCFCFC',
   invertedText: '#050505',
+  border: '#FCFCFC',
 });
 
 const STATUS_BAR = {

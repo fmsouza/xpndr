@@ -7,6 +7,7 @@ import { useNavigationOptions } from '~/shared/navigation';
 
 import { SecondScreen } from './SecondScreen';
 import { useText } from '~/home/intl';
+import { SettingsScreen } from '~/settings/screens';
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
@@ -26,9 +27,13 @@ export const HomeScreen = () => {
   useNavigationOptions({
     title: getText('homePage.title'),
     headerRight: () => (
-      <IconButton name="plus" color="white" onPress={handleButtonTap} />
+      <IconButton name="cog" color="white" onPress={goToSettings} />
     ),
   });
+
+  const goToSettings = () => {
+    navigation.navigate(SettingsScreen.route as any);
+  };
 
   const handleButtonTap = () => {
     setCount(c => c + 1);
@@ -41,7 +46,8 @@ export const HomeScreen = () => {
   return (
     <Container style={styles.container}>
       <Text>{getText('actions.count')}: {count}</Text>
-      <Button title={getText('actions.next')} onPress={handleNextPagePress} fullWidth />
+      <Button type='outline' title={getText('actions.count')} onPress={handleButtonTap} />
+      <Button title={getText('actions.next')} onPress={handleNextPagePress} />
     </Container>
   );
 };

@@ -8,18 +8,18 @@ type IconButtonProps = {
   name: string;
   size?: number;
   color?: string;
-  type?: string;
+  mdIcon?: boolean;
   onPress: (event: GestureResponderEvent) => void;
 };
 
 export const IconButton = ({
   name,
-  type = '',
+  mdIcon,
   size = 24,
   color = 'black',
   onPress,
 }: IconButtonProps) => (
   <Button type='ripple-only' onPress={onPress} rippleRadius={size * 0.75}>
-    <Icon name={name} size={size} color={color} type={type} />
+    <Icon name={name} size={size} color={color} mdIcon={mdIcon} />
   </Button>
 );

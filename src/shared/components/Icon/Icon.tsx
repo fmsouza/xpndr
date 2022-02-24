@@ -7,16 +7,16 @@ type IconProps = {
   name: string;
   size?: number;
   color?: string;
-  type?: string;
+  mdIcon?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
 };
 
 export const Icon = ({
-  type = '',
+  mdIcon,
   size = 24,
   color = 'black',
   ...props
 }: IconProps) => {
-  const IconComponent: ComponentType<any> = type === 'md' ? MDIcon : MDCIcon;
-  return <IconComponent {...props} type={type} size={size} color={color} />;
+  const IconComponent: ComponentType<any> = mdIcon ? MDIcon : MDCIcon;
+  return <IconComponent {...props} type={mdIcon ? 'md' : ''} size={size} color={color} />;
 };
