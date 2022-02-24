@@ -27,6 +27,14 @@ export const SettingsScreen = () => {
           subtitle={getText('settings.items.language.subtitle')}
           onPress={onHandleNotImplemented}
         />
+        <SettingsItem
+          icon="theme-light-dark"
+          title={getText('settings.items.darkMode.title')}
+          subtitle={getText('settings.items.darkMode.subtitle')}
+          actionType="switch"
+          value={false}
+          onChange={onHandleNotImplemented}
+        />
         <VersionItem />
       </ScrollView>
     </Container>

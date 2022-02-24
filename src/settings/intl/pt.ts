@@ -4,6 +4,10 @@ export const settings = {
     language: {
       title: 'Idioma',
       subtitle: 'Mude suas configurações de idioma'
+    },
+    darkMode: {
+      title: 'Modo escuro',
+      subtitle: 'Habilitar modo escuro'
     }
   },
 };
