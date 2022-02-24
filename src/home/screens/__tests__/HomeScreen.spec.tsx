@@ -10,7 +10,8 @@ jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
   useTheme: jest.fn(() => ({
     dimensions: {},
-    colors: {}
+    colors: {},
+    text: {}
   })),
   useNavigation: jest.fn(() => ({
     navigate: jest.fn(),
