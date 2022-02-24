@@ -22,5 +22,5 @@ jest.mock('@react-navigation/native', () => ({
 it('renders correctly', () => {
   const testRenderer = renderer.create(<HomeScreen />);
   const instance = testRenderer.root;
-  expect(instance.findByType(Button)).toBeDefined();
+  expect(instance.findAllByType(Button).length).toBe(2);
 });
