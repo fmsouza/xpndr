@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { SafeAreaView, View, StyleSheet } from 'react-native';
+import { SafeAreaView, View, StyleSheet, ScrollView } from 'react-native';
 
 import { makeStyles, Theme } from '~/shared/theme';
 
@@ -16,16 +16,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type ContainerProps = {
   style?: any;
+  scrollable?: boolean;
   children: ReactNode;
 };
 
-export const Container = ({ children, style }: ContainerProps) => {
+export const Container = ({ children, style, scrollable, ...props }: ContainerProps) => {
   const styles = useStyles();
+  const BaseView = scrollable ? ScrollView : View;
+  const containerProps = {
+    ...props,
+    contentContainerStyle: scrollable ? style : {},
+    style: !scrollable ? StyleSheet.flatten([styles.container, style]) : styles.container,
+  };
   return (
     <SafeAreaView style={styles.safeWrapper}>
-      <View style={StyleSheet.flatten([styles.container, style])}>
-        {children}
-      </View>
+      <BaseView {...containerProps}>{children}</BaseView>
     </SafeAreaView>
   );
 };
