@@ -1,4 +1,5 @@
 import { PlatformPressable } from '@react-navigation/elements';
+import { useTheme } from '@react-navigation/native';
 import React, { ReactNode } from 'react';
 import { GestureResponderEvent, StyleSheet, Text } from 'react-native';
 import { makeStyles, Theme } from '~/shared/theme';
@@ -69,10 +70,11 @@ export const Button = ({
   type = 'contained'
 }: ButtonWithChildren | ButtonWithTitle) => {
   const styles = useStyles();
+  const theme = useTheme() as Theme;
 
   return (
     <PlatformPressable
-      pressColor="white"
+      pressColor={theme.colors.ripple}
       style={StyleSheet.flatten([
         styles.container,
         fullWidth && styles.fullWidth,

@@ -15,6 +15,7 @@ const COLORS = merge(DefaultTheme.colors, {
   text: '#000000',
   invertedText: '#FFFFFF',
   border: '#666B6A',
+  ripple: '#666B6A'
 });
 
 const STATUS_BAR = {
@@ -26,6 +27,7 @@ export const LightTheme = <Theme>merge(SharedBaseTheme, DefaultTheme, {
   colors: COLORS,
   statusBar: STATUS_BAR,
   navbar: {
+    headerTintColor: '#000000',
     headerStyle: {
       backgroundColor: COLORS.primary,
     }

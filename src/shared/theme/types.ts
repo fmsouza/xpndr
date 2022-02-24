@@ -12,6 +12,7 @@ export type Theme = RNTheme & {
     invertedText: string;
     border: string;
     notification: string;
+    ripple: string;
   };
   viewport: {
     width: number;
@@ -25,6 +26,7 @@ export type Theme = RNTheme & {
   };
   text: {
     baseSize: number;
+    header: number;
   };
   navbar: Partial<{
     headerStyle: Partial<{}>;
