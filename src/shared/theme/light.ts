@@ -26,14 +26,8 @@ export const LightTheme = <Theme>merge(SharedBaseTheme, DefaultTheme, {
   colors: COLORS,
   statusBar: STATUS_BAR,
   navbar: {
-    headerTintColor: '#fff',
     headerStyle: {
       backgroundColor: COLORS.primary,
-    },
-    headerTitleStyle: {
-      textTransform: 'uppercase',
-      fontWeight: 'bold',
-      fontSize: 16
     }
   }
 });

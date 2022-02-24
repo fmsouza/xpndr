@@ -38,11 +38,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
   },
   title: {
-    fontSize: theme.text.baseSize + 2,
+    fontSize: theme.text.baseSize,
     color: theme.colors.text,
   },
   subtitle: {
-    fontSize: theme.text.baseSize,
+    fontSize: theme.text.baseSize - 2,
     color: color(theme.colors.text)
       .lighten(0.9)
       .hex()

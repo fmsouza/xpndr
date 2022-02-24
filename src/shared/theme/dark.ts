@@ -26,9 +26,8 @@ export const DarkTheme = <Theme>merge(SharedBaseTheme, RNDarkTheme, {
   colors: COLORS,
   statusBar: STATUS_BAR,
   navbar: {
-    headerTintColor: '#fff',
     headerStyle: {
-      backgroundColor: COLORS.primary,
+      backgroundColor: COLORS.background,
     },
   }
 });
