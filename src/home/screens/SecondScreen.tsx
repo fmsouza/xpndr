@@ -3,6 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import { makeStyles, Theme } from '~/shared/theme';
 import { Button, Container, Text } from '~/shared/components';
+import { useText } from '~/home/intl';
+import { useNavigationOptions } from '~/shared/navigation';
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
@@ -15,6 +17,11 @@ const useStyles = makeStyles((_: Theme) => ({
 export const SecondScreen = () => {
   const styles = useStyles();
   const navigation = useNavigation();
+  const {getText} = useText();
+
+  useNavigationOptions({
+    title: getText('secondPage.title'),
+  });
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -22,9 +29,9 @@ export const SecondScreen = () => {
 
   return (
     <Container style={styles.container}>
-      <Text>Congratulations! You navigated to the second screen!</Text>
+      <Text>{getText('secondPage.congratulations')}</Text>
       <Button
-        title="Go back"
+        title={getText('actions.back')}
         leadingIcon="chevron-left"
         onPress={handleBackPress}
       />

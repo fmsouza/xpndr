@@ -6,6 +6,7 @@ import { makeStyles, Theme } from '~/shared/theme';
 import { useNavigationOptions } from '~/shared/navigation';
 
 import { SecondScreen } from './SecondScreen';
+import { useText } from '~/home/intl';
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
@@ -19,9 +20,11 @@ const useStyles = makeStyles((_: Theme) => ({
 export const HomeScreen = () => {
   const styles = useStyles();
   const navigation = useNavigation();
+  const {getText} = useText();
   const [count, setCount] = useState(0);
 
   useNavigationOptions({
+    title: getText('homePage.title'),
     headerRight: () => (
       <IconButton name="plus" color="white" onPress={handleButtonTap} />
     ),
@@ -37,14 +40,10 @@ export const HomeScreen = () => {
 
   return (
     <Container style={styles.container}>
-      <Text>Count: {count}</Text>
-      <Button title="hello" onPress={handleNextPagePress} fullWidth />
+      <Text>{getText('actions.count')}: {count}</Text>
+      <Button title={getText('actions.next')} onPress={handleNextPagePress} fullWidth />
     </Container>
   );
 };
 
 HomeScreen.route = 'Home';
-
-HomeScreen.options = {
-  title: 'Home page',
-};
