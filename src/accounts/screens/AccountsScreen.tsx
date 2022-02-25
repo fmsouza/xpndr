@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Container, IconButton } from '~/shared/components';
 import { makeStyles, Theme } from '~/shared/theme';
 import { useNavigationOptions } from '~/shared/navigation';
 import { useText } from '~/accounts/intl';
+
 import { AccountCard, EmptyAccountsList } from '../components';
+import { NewAccountTypeScreen } from './NewAccountTypeScreen';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -21,6 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     flex: 1,
     width: '100%',
     marginBottom: theme.dimensions.margin
+  },
+  emptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%'
   }
 }));
 
@@ -37,10 +44,12 @@ export const AccountsScreen = () => {
     ),
   });
 
-  const handlePressNewAccount = useCallback(() => {}, [navigation.navigate]);
+  const handlePressNewAccount = useCallback(() => {
+    navigation.navigate(NewAccountTypeScreen.route as any);
+  }, [navigation.navigate]);
 
   return (
-    <Container scrollable style={styles.container}>
+    <Container scrollable style={StyleSheet.flatten([styles.container, accounts.length === 0 && styles.emptyContainer])}>
       {accounts.map((account: any, index: number) => (
         <View key={index} style={styles.cardBox}>
           <AccountCard account={account} />
