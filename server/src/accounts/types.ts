@@ -15,7 +15,7 @@ export class Account {
   @Field((type) => String) title: string;
   @Field((type) => Date) createdAt: Date;
   @Field((type) => Date) updatedAt: Date;
-  @Field((type) => Date, { nullable: true }) deletedAt?: Date;
+  @Field((type) => Date, { nullable: true }) deletedAt?: Date | null;
 
   ownerId: number;
   @Field((type) => User) owner?: User;
