@@ -1,7 +1,7 @@
 import { PrismaClient, Account } from "@prisma/client";
 import { Inject, Service } from "typedi";
 
-import { InjectionToken } from "../setup";
+import { InjectionToken } from "../../setup";
 
 @Service()
 export class AccountsRepository {
