@@ -9,3 +9,9 @@ export class UserCreateInput {
   @Field() name: string;
   @Field() password: string;
 }
+
+@InputType()
+export class UserLoginInput {
+  @Field() email: string;
+  @Field() password: string;
+}

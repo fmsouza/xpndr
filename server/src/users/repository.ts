@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Inject, Service } from "typedi";
+import { sha256 } from "../shared/utils";
 
 import { User } from "./types";
 
@@ -22,6 +23,17 @@ export class UsersRepository {
     return this.prisma.user.findUnique({
       where: {
         email
+      }
+    });
+  }
+
+  public async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        email_password: {
+          email,
+          password: sha256(password)
+        }
       }
     });
   }
