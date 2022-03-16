@@ -1,8 +1,8 @@
 import { Service } from "typedi";
 
-import { createJwt } from "../../shared/utils";
+import { createJwt, decodeJwt } from "../../shared/utils";
 import { UsersRepository } from "../repository";
-import { AuthenticationFailedError } from "../types";
+import { AuthenticationFailedError, User } from "../types";
 
 @Service()
 export class AuthService {
@@ -18,5 +18,13 @@ export class AuthService {
       throw new AuthenticationFailedError('The e-mail or password provided is invalid.');
     }
     return createJwt(user);
+  }
+
+  public async getUserByAccessToken(accessToken: string): Promise<User | null> {
+    const decoded = decodeJwt<{ contents: User }>(accessToken);
+    if (!decoded) {
+      throw new AuthenticationFailedError('The auth token is invalid.');
+    }
+    return this.usersRepository.getUserByEmail(decoded.contents.email);
   }
 }
