@@ -1,12 +1,12 @@
 import 'reflect-metadata'
 import { registerEnumType, buildSchema } from 'type-graphql'
 import { ApolloServer } from 'apollo-server'
-import { GraphQLScalarType } from 'graphql'
 import { Container } from 'typedi'
 import { PrismaClient } from '@prisma/client'
-import { DateTimeResolver } from 'graphql-scalars'
 
 import { SortOrder } from './shared/types'
+import { scalars } from './shared/scalars'
+import { resolvers as usersResolvers } from './users';
 
 Container.set({ id: 'PRISMA', factory: () => new PrismaClient() });
 
@@ -15,11 +15,13 @@ Container.set({ id: 'PRISMA', factory: () => new PrismaClient() });
     name: 'SortOrder',
   })
 
-  const resolvers = [] as any;
+  const resolvers = [
+    ...usersResolvers
+  ] as any;
 
   const schema = await buildSchema({
     resolvers,
-    scalarsMap: [{ type: GraphQLScalarType, scalar: DateTimeResolver }],
+    scalarsMap: scalars,
     container: Container
   })
 
