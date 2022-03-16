@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "users" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Account" (
+CREATE TABLE "accounts" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "title" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -17,19 +17,19 @@ CREATE TABLE "Account" (
     "deletedAt" DATETIME,
     "accountTypeId" INTEGER NOT NULL,
     "ownerId" INTEGER NOT NULL,
-    CONSTRAINT "Account_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Account_accountTypeId_fkey" FOREIGN KEY ("accountTypeId") REFERENCES "AccountType" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "accounts_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "accounts_accountTypeId_fkey" FOREIGN KEY ("accountTypeId") REFERENCES "account_types" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
-CREATE TABLE "AccountType" (
+CREATE TABLE "account_types" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "title" TEXT NOT NULL,
     "enabled" BOOLEAN NOT NULL DEFAULT false
 );
 
 -- CreateTable
-CREATE TABLE "AccountTransaction" (
+CREATE TABLE "transactions_account" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "externalId" TEXT NOT NULL,
     "amount" INTEGER NOT NULL,
@@ -40,11 +40,11 @@ CREATE TABLE "AccountTransaction" (
     "createdAt" DATETIME NOT NULL,
     "deletedAt" DATETIME,
     "accountId" INTEGER NOT NULL,
-    CONSTRAINT "AccountTransaction_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Account" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "transactions_account_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
-CREATE TABLE "CreditCardTransaction" (
+CREATE TABLE "transactions_credit_card" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "externalId" TEXT NOT NULL,
     "amount" INTEGER NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE "CreditCardTransaction" (
     "createdAt" DATETIME NOT NULL,
     "deletedAt" DATETIME,
     "accountId" INTEGER NOT NULL,
-    CONSTRAINT "CreditCardTransaction_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Account" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "transactions_credit_card_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -63,27 +63,33 @@ CREATE TABLE "Category" (
 );
 
 -- CreateTable
-CREATE TABLE "CategoriesOnAccountTransactions" (
+CREATE TABLE "categories_transactions_account" (
     "transactionId" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
 
     PRIMARY KEY ("transactionId", "categoryId"),
-    CONSTRAINT "CategoriesOnAccountTransactions_transactionId_fkey" FOREIGN KEY ("transactionId") REFERENCES "AccountTransaction" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "CategoriesOnAccountTransactions_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "categories_transactions_account_transactionId_fkey" FOREIGN KEY ("transactionId") REFERENCES "transactions_account" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "categories_transactions_account_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
-CREATE TABLE "CategoriesOnCreditCardTransactions" (
+CREATE TABLE "categories_transactions_credit_card" (
     "transactionId" INTEGER NOT NULL,
     "categoryId" INTEGER NOT NULL,
 
     PRIMARY KEY ("transactionId", "categoryId"),
-    CONSTRAINT "CategoriesOnCreditCardTransactions_transactionId_fkey" FOREIGN KEY ("transactionId") REFERENCES "CreditCardTransaction" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "CategoriesOnCreditCardTransactions_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "categories_transactions_credit_card_transactionId_fkey" FOREIGN KEY ("transactionId") REFERENCES "transactions_credit_card" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "categories_transactions_credit_card_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE INDEX "users_email_password_idx" ON "users"("email", "password");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_password_key" ON "users"("email", "password");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_title_key" ON "Category"("title");

@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client'
+import { sha256 } from '../src/shared/utils'
 
 const prisma = new PrismaClient()
 
@@ -6,17 +7,17 @@ const userData: Prisma.UserCreateInput[] = [
   {
     name: 'Alice',
     email: 'alice@xpndr.io',
-    password: '123456'
+    password: sha256('123456')
   },
   {
     name: 'Nilu',
     email: 'nilu@xpndr.io',
-    password: '123456'
+    password: sha256('123456')
   },
   {
     name: 'Mahmoud',
     email: 'mahmoud@xpndr.io',
-    password: '123456'
+    password: sha256('123456')
   },
 ]
 

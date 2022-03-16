@@ -16,6 +16,10 @@ model User {
   updatedAt DateTime @updatedAt
 
   accounts Account[]
+
+  @@unique(fields: [email, password], name: "email_password")
+  @@index([email, password])
+  @@map("users")
 }
 
 model Account {
@@ -31,6 +35,8 @@ model Account {
   owner                  User?                   @relation(fields: [ownerId], references: [id])
   accountTransactions    AccountTransaction[]
   creditCardTransactions CreditCardTransaction[]
+
+  @@map("accounts")
 }
 
 model AccountType {
@@ -39,6 +45,8 @@ model AccountType {
   enabled Boolean @default(false)
 
   accounts Account[]
+
+  @@map("account_types")
 }
 
 model AccountTransaction {
@@ -55,6 +63,8 @@ model AccountTransaction {
   accountId  Int
   account    Account                           @relation(fields: [accountId], references: [id])
   categories CategoriesOnAccountTransactions[]
+
+  @@map("transactions_account")
 }
 
 model CreditCardTransaction {
@@ -69,6 +79,8 @@ model CreditCardTransaction {
   accountId  Int
   account    Account                              @relation(fields: [accountId], references: [id])
   categories CategoriesOnCreditCardTransactions[]
+
+  @@map("transactions_credit_card")
 }
 
 model Category {
@@ -86,6 +98,7 @@ model CategoriesOnAccountTransactions {
   category      Category           @relation(fields: [categoryId], references: [id])
 
   @@id([transactionId, categoryId])
+  @@map("categories_transactions_account")
 }
 
 model CategoriesOnCreditCardTransactions {
@@ -95,4 +108,5 @@ model CategoriesOnCreditCardTransactions {
   category      Category              @relation(fields: [categoryId], references: [id])
 
   @@id([transactionId, categoryId])
+  @@map("categories_transactions_credit_card")
 }
