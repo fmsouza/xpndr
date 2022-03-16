@@ -6,7 +6,7 @@ import {
 import { Service } from 'typedi'
 
 import { User } from '../types'
-import { UsersService } from '../service'
+import { UsersService } from '../services'
 
 import { UserCreateInput } from './inputs'
 
