@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts Account[]
+}
+
+model Account {
+  id        Int       @id @default(autoincrement())
+  title     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  accountTypeId          Int
+  accountType            AccountType             @relation(fields: [accountTypeId], references: [id])
+  ownerId                Int
+  owner                  User?                   @relation(fields: [ownerId], references: [id])
+  accountTransactions    AccountTransaction[]
+  creditCardTransactions CreditCardTransaction[]
+}
+
+model AccountType {
+  id      Int     @id @default(autoincrement())
+  title   String
+  enabled Boolean @default(false)
+
+  accounts Account[]
+}
+
+model AccountTransaction {
+  id          Int       @id @default(autoincrement())
+  externalId  String
+  amount      Int
+  title       String
+  details     String?
+  origin      String?
+  destination String?
+  createdAt   DateTime
+  deletedAt   DateTime?
+
+  accountId  Int
+  account    Account                           @relation(fields: [accountId], references: [id])
+  categories CategoriesOnAccountTransactions[]
+}
+
+model CreditCardTransaction {
+  id         Int       @id @default(autoincrement())
+  externalId String
+  amount     Int
+  title      String
+  details    String?
+  createdAt  DateTime
+  deletedAt  DateTime?
+
+  accountId  Int
+  account    Account                              @relation(fields: [accountId], references: [id])
+  categories CategoriesOnCreditCardTransactions[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  title String @unique
+
+  accountTransactions    CategoriesOnAccountTransactions[]
+  creditCardTransactions CategoriesOnCreditCardTransactions[]
+}
+
+model CategoriesOnAccountTransactions {
+  transactionId Int
+  transaction   AccountTransaction @relation(fields: [transactionId], references: [id])
+  categoryId    Int
+  category      Category           @relation(fields: [categoryId], references: [id])
+
+  @@id([transactionId, categoryId])
+}
+
+model CategoriesOnCreditCardTransactions {
+  transactionId Int
+  transaction   CreditCardTransaction @relation(fields: [transactionId], references: [id])
+  categoryId    Int
+  category      Category              @relation(fields: [categoryId], references: [id])
+
+  @@id([transactionId, categoryId])
+}
