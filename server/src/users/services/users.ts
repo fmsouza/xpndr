@@ -24,4 +24,8 @@ export class UsersService {
       password: hashedPassword
     });
   }
+
+  public async getUserById(id: number): Promise<User | null> {
+    return this.usersRepository.getUserById(id);
+  }
 }

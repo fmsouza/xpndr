@@ -1,6 +1,12 @@
 import { IncomingMessage, ServerResponse } from "http";
 import Container from "typedi";
+
 import { AuthService } from "./users/services";
+import { User } from "./users/types";
+
+export type Context = {
+  user: User;
+}
 
 export default async function context({ req }: { req: IncomingMessage, res: ServerResponse }) {
   const authorization = req.headers.authorization;

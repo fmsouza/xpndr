@@ -6,6 +6,7 @@ import { Container } from 'typedi'
 import { SortOrder } from './shared/types'
 import { scalars } from './shared/scalars'
 import { resolvers as usersResolvers } from './users';
+import { authChecker } from './users/auth-checker';
 import context from './context';
 import './setup';
 
@@ -22,8 +23,9 @@ import './setup';
     resolvers,
     scalarsMap: scalars,
     container: Container,
+    authChecker
   })
 
-  new ApolloServer({ schema, context: context }).listen({ port: 4000 }, () =>
+  new ApolloServer({ schema, context }).listen({ port: 4000 }, () =>
     console.log(`🚀 Server ready at: http://localhost:4000`))
 })();
