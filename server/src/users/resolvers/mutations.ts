@@ -16,7 +16,7 @@ export class MutationsResolver {
   public constructor(private readonly usersService: UsersService) { }
 
   @Mutation((returns) => User)
-  async signup(
+  public async signup(
     @Arg('input') input: UserCreateInput,
   ): Promise<User> {
     return this.usersService.createUser(input);
