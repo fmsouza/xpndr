@@ -9,5 +9,10 @@ const GLOBAL_CONSTANTS: Globals = {
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN ?? '1d',
 }
 
-Container.set({ id: 'PRISMA', factory: () => new PrismaClient() });
-Container.set({ id: 'GLOBALS', value: GLOBAL_CONSTANTS });
+export enum InjectionToken {
+  PRISMA = '@Container/PRISMA',
+  GLOBALS = '@Container/GLOBALS'
+}
+
+Container.set({ id: InjectionToken.PRISMA, factory: () => new PrismaClient() });
+Container.set({ id: InjectionToken.GLOBALS, value: GLOBAL_CONSTANTS });
