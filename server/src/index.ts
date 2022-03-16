@@ -5,6 +5,7 @@ import { Container } from 'typedi'
 
 import { SortOrder } from './shared/types'
 import { scalars } from './shared/scalars'
+import { resolvers as accountsResolvers } from './accounts';
 import { resolvers as usersResolvers } from './users';
 import { authChecker } from './users/auth-checker';
 import context from './context';
@@ -16,6 +17,7 @@ import './setup';
   })
 
   const resolvers = [
+    ...accountsResolvers,
     ...usersResolvers
   ] as any;
 
