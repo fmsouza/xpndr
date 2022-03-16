@@ -38,6 +38,7 @@ export class AccountsResolvers {
     return this.accountsService.getAccountsByUserId(user.id);
   }
 
+  @Authorized()
   @Mutation((returns) => Account)
   public async createAccount(
     @Ctx() { user }: Context,
