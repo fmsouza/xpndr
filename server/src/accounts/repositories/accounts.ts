@@ -1,12 +1,12 @@
 import { PrismaClient, Account } from "@prisma/client";
 import { Inject, Service } from "typedi";
 
-import { InjectionToken } from "../../setup";
+import { PRISMA_TOKEN } from "../../tokens";
 
 @Service()
 export class AccountsRepository {
 
-  public constructor(@Inject(InjectionToken.PRISMA) private readonly prisma: PrismaClient) { }
+  public constructor(@Inject(PRISMA_TOKEN) private readonly prisma: PrismaClient) { }
 
   public async createAccount(input: { title: string, accountTypeId: number, ownerId: number }): Promise<Account> {
     return this.prisma.account.create({

@@ -1,6 +1,7 @@
 import { Container } from 'typedi'
 import { PrismaClient } from '@prisma/client'
 
+import * as Token from './tokens';
 import { Globals } from './shared/types';
 
 const GLOBAL_CONSTANTS: Globals = {
@@ -9,10 +10,6 @@ const GLOBAL_CONSTANTS: Globals = {
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN ?? '1d',
 }
 
-export enum InjectionToken {
-  PRISMA = '@Container/PRISMA',
-  GLOBALS = '@Container/GLOBALS'
-}
 
-Container.set({ id: InjectionToken.PRISMA, factory: () => new PrismaClient() });
-Container.set({ id: InjectionToken.GLOBALS, value: GLOBAL_CONSTANTS });
+Container.set({ id: Token.PRISMA_TOKEN, factory: () => new PrismaClient() });
+Container.set({ id: Token.GLOBALS_TOKEN, value: GLOBAL_CONSTANTS });
