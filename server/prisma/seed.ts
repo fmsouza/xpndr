@@ -1,25 +1,6 @@
 import { PrismaClient, Prisma } from '@prisma/client'
-import { sha256 } from '../src/shared/utils'
 
-const prisma = new PrismaClient()
-
-const userData: Prisma.UserCreateInput[] = [
-  {
-    name: 'Alice',
-    email: 'alice@xpndr.io',
-    password: sha256('123456')
-  },
-  {
-    name: 'Nilu',
-    email: 'nilu@xpndr.io',
-    password: sha256('123456')
-  },
-  {
-    name: 'Mahmoud',
-    email: 'mahmoud@xpndr.io',
-    password: sha256('123456')
-  },
-]
+const prisma = new PrismaClient();
 
 const accountTypeData: Prisma.AccountTypeCreateInput[] = [
   {
@@ -30,15 +11,8 @@ const accountTypeData: Prisma.AccountTypeCreateInput[] = [
 
 async function main() {
   console.log(`Start seeding ...`);
-  console.log(`Creating users...`);
-  for (const u of userData) {
-    const user = await prisma.user.create({
-      data: u,
-    })
-    console.log(`Created user with id: ${user.id}`)
-  }
 
-  console.log(`Creating account types...`);]
+  console.log(`Creating account types...`);
   for (const at of accountTypeData) {
     const accountType = await prisma.accountType.create({
       data: at,
