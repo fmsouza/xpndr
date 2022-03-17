@@ -22,4 +22,6 @@ export class Account {
 
   accountTypeId: number;
   @Field((type) => AccountType) accountType?: AccountType;
+
+  connectionDetails?: string | null;
 }

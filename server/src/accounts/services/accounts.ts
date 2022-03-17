@@ -26,4 +26,8 @@ export class AccountsService {
   public async getAccountsByUserId(id: number): Promise<Account[]> {
     return this.accountsRepository.getAccountsByUserId(id);
   }
+
+  public async updateAccount(account: Account): Promise<Account> {
+    return this.accountsRepository.updateAccount(account);
+  }
 }

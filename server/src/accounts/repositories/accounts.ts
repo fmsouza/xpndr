@@ -33,4 +33,12 @@ export class AccountsRepository {
       }
     });
   }
+
+  public async updateAccount(account: Account): Promise<Account> {
+    const { id, ...data } = account;
+    return this.prisma.account.update({
+      where: { id },
+      data
+    });
+  }
 }
