@@ -10,6 +10,7 @@
     "graphql": "15.8.0",
     "graphql-scalars": "1.15.0",
     "jsonwebtoken": "^8.5.1",
+    "nubank-api": "^2.0.0",
     "reflect-metadata": "0.1.13",
     "type-graphql": "1.1.1",
     "typedi": "^0.10.0"
