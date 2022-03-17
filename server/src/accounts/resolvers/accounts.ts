@@ -16,6 +16,8 @@ import { Context } from '../../context'
 import { AccountsService } from '../services'
 import { Account, AccountType } from '../types'
 import { AccountTypesService } from '../services'
+import { User } from '../../users/types'
+import { UsersService } from '../../users/services'
 
 @InputType()
 export class AccountCreateInput {
@@ -28,7 +30,8 @@ export class AccountCreateInput {
 export class AccountsResolvers {
   public constructor(
     private readonly accountTypesService: AccountTypesService,
-    private readonly accountsService: AccountsService
+    private readonly accountsService: AccountsService,
+    private readonly usersService: UsersService
   ) { }
 
   @Authorized()
@@ -54,5 +57,11 @@ export class AccountsResolvers {
   @FieldResolver(() => [AccountType])
   public async accountType(@Root() account: Account) {
     return this.accountTypesService.getAccountTypeById(account.accountTypeId)
+  }
+
+  @Authorized()
+  @FieldResolver(() => [User])
+  public async owner(@Root() account: Account) {
+    return this.usersService.getUserById(account.ownerId);
   }
 }
