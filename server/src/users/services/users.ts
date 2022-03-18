@@ -1,6 +1,7 @@
 import { Service } from "typedi";
 
-import { sha256 } from "../../shared/utils";
+import { sha256 } from "~/shared/utils";
+
 import { UsersRepository } from "../repository";
 import { User } from "../types";
 

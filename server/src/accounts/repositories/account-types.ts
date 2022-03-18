@@ -1,7 +1,7 @@
 import { PrismaClient, AccountType } from "@prisma/client";
 import { Inject, Service } from "typedi";
 
-import { PRISMA_TOKEN } from "../../tokens";
+import { PRISMA_TOKEN } from "~/tokens";
 
 @Service()
 export class AccountTypesRepository {

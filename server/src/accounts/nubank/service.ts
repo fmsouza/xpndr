@@ -2,7 +2,7 @@ import { Service } from "typedi";
 import cache from 'memory-cache';
 import {NubankApi} from 'nubank-api';
 
-import { sha256 } from "../../shared/utils";
+import { sha256 } from "~/shared/utils";
 
 const EXPIRES_IN_TEN_MINUTES = 600_000;
 

@@ -10,9 +10,10 @@ import {
 } from 'type-graphql'
 import { Service } from 'typedi'
 
+import { Context } from '~/context';
+
 import { AuthResponse, User } from './types'
 import { AuthService, UsersService } from './services'
-import { Context } from '../context';
 
 @InputType()
 export class UserCreateInput {

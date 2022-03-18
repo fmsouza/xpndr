@@ -1,6 +1,7 @@
 import { Service } from "typedi";
 
-import { createJwt, decodeJwt } from "../../shared/utils";
+import { createJwt, decodeJwt } from "~/shared/utils";
+
 import { UsersRepository } from "../repository";
 import { AuthenticationFailedError, User } from "../types";
 

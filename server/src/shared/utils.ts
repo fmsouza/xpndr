@@ -2,8 +2,9 @@ import { createHash } from 'crypto';
 import { Container } from 'typedi'
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 
+import { GLOBALS_TOKEN } from '~/tokens';
+
 import { Globals } from './types';
-import { GLOBALS_TOKEN } from '../tokens';
 
 export function sha256(content: string): string {
   return createHash('sha256').update(content).digest('hex');

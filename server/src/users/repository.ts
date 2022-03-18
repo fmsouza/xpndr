@@ -1,9 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { Inject, Service } from "typedi";
 
-import { sha256 } from "../shared/utils";
+import { PRISMA_TOKEN } from "~/tokens";
+import { sha256 } from "~/shared/utils";
+
 import { User } from "./types";
-import { PRISMA_TOKEN } from "../tokens";
 
 @Service()
 export class UsersRepository {

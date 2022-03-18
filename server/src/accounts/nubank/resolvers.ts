@@ -8,9 +8,10 @@ import {
   ObjectType,
 } from 'type-graphql'
 import { Service } from 'typedi'
-import { ResourceNotFoundError } from '../../shared/types';
-import { AccountsService } from '../services';
 
+import { ResourceNotFoundError } from '~/shared/types';
+
+import { AccountsService } from '../services';
 import { Account } from '../types'
 import { NubankService } from './service';
 

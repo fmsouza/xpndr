@@ -1,7 +1,8 @@
 import { Account } from "@prisma/client";
 import { Service } from "typedi";
 
-import { User } from "../../users/types";
+import { User } from "~/users/types";
+
 import { AccountsRepository } from "../repositories";
 
 @Service()

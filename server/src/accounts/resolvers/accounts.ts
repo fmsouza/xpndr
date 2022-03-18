@@ -12,12 +12,13 @@ import {
 } from 'type-graphql'
 import { Service } from 'typedi'
 
-import { Context } from '../../context'
+import { Context } from '~/context'
+import { User } from '~/users/types'
+import { UsersService } from '~/users/services'
+
 import { AccountsService } from '../services'
 import { Account, AccountType } from '../types'
 import { AccountTypesService } from '../services'
-import { User } from '../../users/types'
-import { UsersService } from '../../users/services'
 
 @InputType()
 export class AccountCreateInput {

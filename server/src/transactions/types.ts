@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID } from 'type-graphql'
 
-import { Account } from '../accounts/types'
+import { Account } from '~/accounts/types'
 
 @ObjectType()
 export class AccountTransaction {
