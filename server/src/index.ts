@@ -5,8 +5,6 @@ import { Container } from 'typedi'
 
 import { SortOrder } from './shared/types'
 import { scalars } from './shared/scalars'
-import { resolvers as accountsResolvers } from './accounts';
-import { resolvers as usersResolvers } from './users';
 import authChecker from './auth-checker';
 import context from './context';
 import './setup';
@@ -16,13 +14,11 @@ import './setup';
     name: 'SortOrder',
   })
 
-  const resolvers = [
-    ...accountsResolvers,
-    ...usersResolvers
-  ] as any;
-
   const schema = await buildSchema({
-    resolvers,
+    resolvers: [
+      __dirname + "/**/resolvers.ts",
+      __dirname + "/**/resolvers/*.ts"
+    ],
     scalarsMap: scalars,
     container: Container,
     authChecker
