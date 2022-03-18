@@ -27,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "eslint": "^8.11.0",
+    "husky": "^7.0.4",
     "prisma": "3.11.0",
     "ts-node": "10.7.0",
     "ts-node-dev": "1.1.8",
@@ -34,5 +35,10 @@
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
