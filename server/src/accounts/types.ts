@@ -4,24 +4,24 @@ import { User } from '~/users/types'
 
 @ObjectType()
 export class AccountType {
-  @Field((type) => ID) id: number;
-  @Field((type) => String) title: string;
-  @Field((type) => Boolean) enabled: boolean;
+  @Field((_type) => ID) id: number;
+  @Field((_type) => String) title: string;
+  @Field((_type) => Boolean) enabled: boolean;
 }
 
 @ObjectType()
 export class Account {
-  @Field((type) => ID) id: number;
-  @Field((type) => String) title: string;
-  @Field((type) => Date) createdAt: Date;
-  @Field((type) => Date) updatedAt: Date;
-  @Field((type) => Date, { nullable: true }) deletedAt?: Date | null;
+  @Field((_type) => ID) id: number;
+  @Field((_type) => String) title: string;
+  @Field((_type) => Date) createdAt: Date;
+  @Field((_type) => Date) updatedAt: Date;
+  @Field((_type) => Date, { nullable: true }) deletedAt?: Date | null;
 
   ownerId: number;
-  @Field((type) => User) owner?: User;
+  @Field((_type) => User) owner?: User;
 
   accountTypeId: number;
-  @Field((type) => AccountType) accountType?: AccountType;
+  @Field((_type) => AccountType) accountType?: AccountType;
 
   connectionDetails?: string | null;
 }

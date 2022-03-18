@@ -4,26 +4,26 @@ import { ApolloError } from 'apollo-server'
 
 @ObjectType()
 export class User {
-  @Field((type) => ID)
+  @Field((_type) => ID)
   id: number
 
   @Field()
   @IsEmail()
   email: string
 
-  @Field((type) => String)
+  @Field((_type) => String)
   name: string
 
-  @Field((type) => Date)
+  @Field((_type) => Date)
   createdAt: Date
 
-  @Field((type) => Date)
+  @Field((_type) => Date)
   updatedAt: Date
 }
 
 @ObjectType()
 export class AuthResponse {
-  @Field((type) => String)
+  @Field((_type) => String)
   accessToken: string
 }
 

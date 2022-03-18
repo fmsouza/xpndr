@@ -43,14 +43,14 @@ export class UsersResolvers {
     return this.usersService.getUserById(user.id);
   }
 
-  @Mutation((returns) => User)
+  @Mutation((_returns) => User)
   public async signup(
     @Arg('input') input: UserCreateInput,
   ): Promise<User> {
     return this.usersService.createUser(input);
   }
 
-  @Mutation((returns) => AuthResponse)
+  @Mutation((_returns) => AuthResponse)
   public async login(
     @Arg('input') input: UserLoginInput,
   ): Promise<AuthResponse> {

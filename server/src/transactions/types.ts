@@ -4,37 +4,37 @@ import { Account } from '~/accounts/types'
 
 @ObjectType()
 export class AccountTransaction {
-  @Field((type) => ID) id: number
-  @Field((type) => String) externalId: string
-  @Field((type) => Number) amount: number
-  @Field((type) => String) details: string
-  @Field((type) => String) origin: string
-  @Field((type) => String) destination: string
-  @Field((type) => Date) createdAt: Date
-  @Field((type) => Date) updatedAt: Date
-  @Field((type) => Date) deletedAt?: Date | null
+  @Field((_type) => ID) id: number
+  @Field((_type) => String) externalId: string
+  @Field((_type) => Number) amount: number
+  @Field((_type) => String) details: string
+  @Field((_type) => String) origin: string
+  @Field((_type) => String) destination: string
+  @Field((_type) => Date) createdAt: Date
+  @Field((_type) => Date) updatedAt: Date
+  @Field((_type) => Date) deletedAt?: Date | null
 
   accountId: number;
-  @Field((type) => Account) account: Account
+  @Field((_type) => Account) account: Account
 
   categoryId: number;
-  // @Field((type) => Category) category: Category
+  // @Field((_type) => Category) category: Category
 }
 
 @ObjectType()
 export class CreditCardTransaction {
-  @Field((type) => ID) id: number
-  @Field((type) => String) externalId: string
-  @Field((type) => Number) amount: number
-  @Field((type) => String) title: string
-  @Field((type) => String) details: string
-  @Field((type) => Date) createdAt: Date
-  @Field((type) => Date) updatedAt: Date
-  @Field((type) => Date) deletedAt?: Date | null
+  @Field((_type) => ID) id: number
+  @Field((_type) => String) externalId: string
+  @Field((_type) => Number) amount: number
+  @Field((_type) => String) title: string
+  @Field((_type) => String) details: string
+  @Field((_type) => Date) createdAt: Date
+  @Field((_type) => Date) updatedAt: Date
+  @Field((_type) => Date) deletedAt?: Date | null
 
   accountId: number;
-  @Field((type) => Account) account: Account
+  @Field((_type) => Account) account: Account
 
   categoryId: number;
-  // @Field((type) => Category) category: Category
+  // @Field((_type) => Category) category: Category
 }

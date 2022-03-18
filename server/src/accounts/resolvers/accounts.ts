@@ -43,7 +43,7 @@ export class AccountsResolvers {
   }
 
   @Authorized()
-  @Mutation((returns) => Account)
+  @Mutation((_returns) => Account)
   public async createAccount(
     @Ctx() { user }: Context,
     @Arg('input') input: AccountCreateInput,

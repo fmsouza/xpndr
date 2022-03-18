@@ -34,7 +34,7 @@ export class NubankAccountVerificationInput {
 
 @ObjectType()
 export class NubankLoginResponse {
-  @Field((type) => String)
+  @Field((_type) => String)
   sentTo: string
 }
 
@@ -47,7 +47,7 @@ export class NubankResolvers {
   ) { }
 
   @Authorized()
-  @Mutation((returns) => NubankLoginResponse)
+  @Mutation((_returns) => NubankLoginResponse)
   public async nubankAccountLogin(
     @Arg('input') input: NubankAuthenticationInput,
   ): Promise<NubankLoginResponse> {
@@ -56,7 +56,7 @@ export class NubankResolvers {
   }
 
   @Authorized()
-  @Mutation((returns) => Account)
+  @Mutation((_returns) => Account)
   public async nubankVerifyAccount(
     @Arg('input') input: NubankAccountVerificationInput,
   ): Promise<Account> {
