@@ -23,11 +23,11 @@ model User {
 }
 
 model Account {
-  id        Int       @id @default(autoincrement())
-  title     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
+  id                Int       @id @default(autoincrement())
+  title             String
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
   connectionDetails String?
 
   accountTypeId          Int
@@ -61,9 +61,11 @@ model AccountTransaction {
   createdAt   DateTime
   deletedAt   DateTime?
 
-  accountId  Int
-  account    Account                           @relation(fields: [accountId], references: [id])
-  categories CategoriesOnAccountTransactions[]
+  accountId Int
+  account   Account @relation(fields: [accountId], references: [id])
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
 
   @@map("transactions_account")
 }
@@ -77,37 +79,18 @@ model CreditCardTransaction {
   createdAt  DateTime
   deletedAt  DateTime?
 
-  accountId  Int
-  account    Account                              @relation(fields: [accountId], references: [id])
-  categories CategoriesOnCreditCardTransactions[]
+  accountId Int
+  account   Account @relation(fields: [accountId], references: [id])
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
 
   @@map("transactions_credit_card")
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  title String @unique
-
-  accountTransactions    CategoriesOnAccountTransactions[]
-  creditCardTransactions CategoriesOnCreditCardTransactions[]
-}
-
-model CategoriesOnAccountTransactions {
-  transactionId Int
-  transaction   AccountTransaction @relation(fields: [transactionId], references: [id])
-  categoryId    Int
-  category      Category           @relation(fields: [categoryId], references: [id])
-
-  @@id([transactionId, categoryId])
-  @@map("categories_transactions_account")
-}
-
-model CategoriesOnCreditCardTransactions {
-  transactionId Int
-  transaction   CreditCardTransaction @relation(fields: [transactionId], references: [id])
-  categoryId    Int
-  category      Category              @relation(fields: [categoryId], references: [id])
-
-  @@id([transactionId, categoryId])
-  @@map("categories_transactions_credit_card")
+  id                    Int                     @id @default(autoincrement())
+  title                 String                  @unique
+  AccountTransaction    AccountTransaction[]
+  CreditCardTransaction CreditCardTransaction[]
 }
