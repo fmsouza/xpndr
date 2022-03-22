@@ -7,13 +7,16 @@ import {
   Arg,
   ObjectType,
 } from 'type-graphql'
-import { Service } from 'typedi'
+import Container, { Service } from 'typedi'
 
 import { ResourceNotFoundError } from '~/shared/types';
 
 import { AccountsService } from '../services';
 import { Account } from '../types'
+import { NubankEventListener } from './listener';
 import { NubankService } from './service';
+
+Container.get(NubankEventListener);
 
 @InputType()
 export class NubankAuthenticationInput {
@@ -43,7 +46,7 @@ export class NubankLoginResponse {
 export class NubankResolvers {
   public constructor(
     private readonly nubankService: NubankService,
-    private readonly accountsService: AccountsService,
+    private readonly accountsService: AccountsService
   ) { }
 
   @Authorized()

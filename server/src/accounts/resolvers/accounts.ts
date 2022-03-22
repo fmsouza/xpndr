@@ -10,15 +10,21 @@ import {
   FieldResolver,
   Root,
 } from 'type-graphql'
-import { Service } from 'typedi'
+import Container, { Inject, Service } from 'typedi'
+import EventEmitter from 'events'
 
 import { Context } from '~/context'
 import { User } from '~/users/types'
 import { UsersService } from '~/users/services'
+import { QUEUE_TOKEN } from '~/tokens'
+import { QueueEvent, ResourceNotFoundError } from '~/shared/types'
 
 import { AccountsService } from '../services'
 import { Account, AccountType } from '../types'
 import { AccountTypesService } from '../services'
+import { AccountsEventListener } from '../listener'
+
+Container.get(AccountsEventListener);
 
 @InputType()
 export class AccountCreateInput {
@@ -26,14 +32,20 @@ export class AccountCreateInput {
   @Field() accountTypeId: number;
 }
 
+@InputType()
+export class AccountSyncInput {
+  @Field() accountId: number;
+}
+
 @Service()
 @Resolver(Account)
 export class AccountsResolvers {
   public constructor(
+    @Inject(QUEUE_TOKEN) private readonly queue: EventEmitter,
     private readonly accountTypesService: AccountTypesService,
     private readonly accountsService: AccountsService,
-    private readonly usersService: UsersService
-  ) { }
+    private readonly usersService: UsersService,
+  ) {}
 
   @Authorized()
   @Query(() => [Account])
@@ -52,6 +64,21 @@ export class AccountsResolvers {
       ...input,
       user
     });
+  }
+
+  @Authorized()
+  @Mutation((_returns) => Boolean)
+  public async syncAccount(
+    @Ctx() { user }: Context,
+    @Arg('input') input: AccountSyncInput,
+  ): Promise<boolean> {
+    const { accountId } = input;
+    const account: Account | null = await this.accountsService.getAccountById(accountId);
+    if (!account) {
+      throw new ResourceNotFoundError('This account does not exist.');
+    }
+    this.queue.emit(QueueEvent.ACCOUNT_SYNC, account);
+    return true;
   }
 
   @Authorized()
