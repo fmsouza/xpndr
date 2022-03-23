@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { registerEnumType, buildSchema } from 'type-graphql';
+import { buildSchema, registerEnumType } from 'type-graphql';
 import { ApolloServer } from 'apollo-server';
 import { Container } from 'typedi';
 

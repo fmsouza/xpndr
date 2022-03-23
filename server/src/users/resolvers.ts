@@ -1,12 +1,12 @@
 import {
-  Resolver,
-  Mutation,
   Arg,
-  InputType,
-  Field,
-  Ctx,
   Authorized,
+  Ctx,
+  Field,
+  InputType,
+  Mutation,
   Query,
+  Resolver,
 } from 'type-graphql';
 import { Service } from 'typedi';
 

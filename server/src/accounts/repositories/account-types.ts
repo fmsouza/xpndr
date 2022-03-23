@@ -1,4 +1,4 @@
-import { PrismaClient, AccountType } from "@prisma/client";
+import { AccountType, PrismaClient } from "@prisma/client";
 import { Inject, Service } from "typedi";
 
 import { PRISMA_TOKEN } from "~/tokens";

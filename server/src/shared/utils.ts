@@ -1,6 +1,6 @@
 import { createHash } from 'crypto';
 import { Container } from 'typedi';
-import { sign, SignOptions, verify } from 'jsonwebtoken';
+import { SignOptions, sign, verify } from 'jsonwebtoken';
 
 import { GLOBALS_TOKEN } from '~/tokens';
 

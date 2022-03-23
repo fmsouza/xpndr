@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }]
   }
 };

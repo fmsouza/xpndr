@@ -1,7 +1,7 @@
 import {
-  Resolver,
-  Query,
   Authorized,
+  Query,
+  Resolver,
 } from 'type-graphql';
 import { Service } from 'typedi';
 

@@ -1,11 +1,11 @@
 import {
-  Resolver,
-  Authorized,
-  InputType,
-  Field,
-  Mutation,
   Arg,
+  Authorized,
+  Field,
+  InputType,
+  Mutation,
   ObjectType,
+  Resolver,
 } from 'type-graphql';
 import Container, { Service } from 'typedi';
 
