@@ -7,14 +7,14 @@ import {
   Query,
   Resolver,
   Root,
-} from 'type-graphql'
-import { Service } from 'typedi'
+} from 'type-graphql';
+import { Service } from 'typedi';
 
 import { AccountsService } from '~/accounts/services';
 import { Account } from '~/accounts/types';
 
-import { CreditCardTransactionsService } from '../services'
-import { CreditCardTransaction } from '../types'
+import { CreditCardTransactionsService } from '../services';
+import { CreditCardTransaction } from '../types';
 
 @InputType()
 export class CreditCardTransactionsInput {

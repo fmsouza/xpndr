@@ -1,35 +1,35 @@
-import { ObjectType, Field, ID, registerEnumType } from 'type-graphql'
+import { ObjectType, Field, ID, registerEnumType } from 'type-graphql';
 
-import { Account } from '~/accounts/types'
+import { Account } from '~/accounts/types';
 
 @ObjectType()
 export class AccountTransaction {
-  @Field((_type) => ID) id: number
-  @Field((_type) => String) externalId: string
-  @Field((_type) => String) title: string
-  @Field((_type) => Number) amount: number
-  @Field((_type) => AccountEventType) type: AccountEventType
-  @Field((_type) => TransactionMovement) movement: TransactionMovement
-  @Field((_type) => Date) createdAt: Date
+  @Field((_type) => ID) id: number;
+  @Field((_type) => String) externalId: string;
+  @Field((_type) => String) title: string;
+  @Field((_type) => Number) amount: number;
+  @Field((_type) => AccountEventType) type: AccountEventType;
+  @Field((_type) => TransactionMovement) movement: TransactionMovement;
+  @Field((_type) => Date) createdAt: Date;
 
   accountId: number;
-  @Field((_type) => Account) account: Account
+  @Field((_type) => Account) account: Account;
 }
 
 @ObjectType()
 export class CreditCardTransaction {
-  @Field((_type) => ID) id: number
-  @Field((_type) => String) externalId: string
-  @Field((_type) => Number) amount: number
-  @Field((_type) => Number, { nullable: true }) installments?: number | null
-  @Field((_type) => String) title: string
-  @Field((_type) => Category) category: Category
-  @Field((_type) => Boolean) isForeign: boolean
-  @Field((_type) => Boolean) online: boolean
-  @Field((_type) => Date) createdAt: Date
+  @Field((_type) => ID) id: number;
+  @Field((_type) => String) externalId: string;
+  @Field((_type) => Number) amount: number;
+  @Field((_type) => Number, { nullable: true }) installments?: number | null;
+  @Field((_type) => String) title: string;
+  @Field((_type) => Category) category: Category;
+  @Field((_type) => Boolean) isForeign: boolean;
+  @Field((_type) => Boolean) online: boolean;
+  @Field((_type) => Date) createdAt: Date;
 
   accountId: number;
-  @Field((_type) => Account) account: Account
+  @Field((_type) => Account) account: Account;
 }
 
 export enum Category {

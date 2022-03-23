@@ -1,30 +1,30 @@
-import { ObjectType, Field, ID } from 'type-graphql'
-import { IsEmail } from 'class-validator'
-import { ApolloError } from 'apollo-server'
+import { ObjectType, Field, ID } from 'type-graphql';
+import { IsEmail } from 'class-validator';
+import { ApolloError } from 'apollo-server';
 
 @ObjectType()
 export class User {
   @Field((_type) => ID)
-  id: number
+  id: number;
 
   @Field()
   @IsEmail()
-  email: string
+  email: string;
 
   @Field((_type) => String)
-  name: string
+  name: string;
 
   @Field((_type) => Date)
-  createdAt: Date
+  createdAt: Date;
 
   @Field((_type) => Date)
-  updatedAt: Date
+  updatedAt: Date;
 }
 
 @ObjectType()
 export class AuthResponse {
   @Field((_type) => String)
-  accessToken: string
+  accessToken: string;
 }
 
 export class AuthenticationFailedError extends ApolloError {

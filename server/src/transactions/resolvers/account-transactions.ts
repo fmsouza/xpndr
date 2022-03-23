@@ -7,13 +7,13 @@ import {
   Query,
   Resolver,
   Root,
-} from 'type-graphql'
-import { Service } from 'typedi'
+} from 'type-graphql';
+import { Service } from 'typedi';
 import { AccountsService } from '~/accounts/services';
 import { Account } from '~/accounts/types';
 
-import { AccountTransactionsService } from '../services'
-import { AccountTransaction } from '../types'
+import { AccountTransactionsService } from '../services';
+import { AccountTransaction } from '../types';
 
 @InputType()
 export class AccountTransactionsInput {

@@ -1,4 +1,4 @@
-import { ApolloError } from 'apollo-server'
+import { ApolloError } from 'apollo-server';
 
 export enum SortOrder {
   asc = 'asc',

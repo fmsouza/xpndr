@@ -7,13 +7,13 @@ import {
   Ctx,
   Authorized,
   Query,
-} from 'type-graphql'
-import { Service } from 'typedi'
+} from 'type-graphql';
+import { Service } from 'typedi';
 
 import { Context } from '~/context';
 
-import { AuthResponse, User } from './types'
-import { AuthService, UsersService } from './services'
+import { AuthResponse, User } from './types';
+import { AuthService, UsersService } from './services';
 
 @InputType()
 export class UserCreateInput {

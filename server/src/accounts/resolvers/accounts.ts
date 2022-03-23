@@ -9,20 +9,20 @@ import {
   Arg,
   FieldResolver,
   Root,
-} from 'type-graphql'
-import Container, { Inject, Service } from 'typedi'
-import EventEmitter from 'events'
+} from 'type-graphql';
+import Container, { Inject, Service } from 'typedi';
+import EventEmitter from 'events';
 
-import { Context } from '~/context'
-import { User } from '~/users/types'
-import { UsersService } from '~/users/services'
-import { QUEUE_TOKEN } from '~/tokens'
-import { QueueEvent, ResourceNotFoundError } from '~/shared/types'
+import { Context } from '~/context';
+import { User } from '~/users/types';
+import { UsersService } from '~/users/services';
+import { QUEUE_TOKEN } from '~/tokens';
+import { QueueEvent, ResourceNotFoundError } from '~/shared/types';
 
-import { AccountsService } from '../services'
-import { Account, AccountType } from '../types'
-import { AccountTypesService } from '../services'
-import { AccountsEventListener } from '../listener'
+import { AccountsService } from '../services';
+import { Account, AccountType } from '../types';
+import { AccountTypesService } from '../services';
+import { AccountsEventListener } from '../listener';
 
 Container.get(AccountsEventListener);
 
@@ -69,7 +69,6 @@ export class AccountsResolvers {
   @Authorized()
   @Mutation((_returns) => Boolean)
   public async syncAccount(
-    @Ctx() { user }: Context,
     @Arg('input') input: AccountSyncInput,
   ): Promise<boolean> {
     const { accountId } = input;
@@ -84,7 +83,7 @@ export class AccountsResolvers {
   @Authorized()
   @FieldResolver(() => [AccountType])
   public async accountType(@Root() account: Account) {
-    return this.accountTypesService.getAccountTypeById(account.accountTypeId)
+    return this.accountTypesService.getAccountTypeById(account.accountTypeId);
   }
 
   @Authorized()

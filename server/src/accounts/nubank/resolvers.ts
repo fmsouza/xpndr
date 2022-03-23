@@ -6,13 +6,13 @@ import {
   Mutation,
   Arg,
   ObjectType,
-} from 'type-graphql'
-import Container, { Service } from 'typedi'
+} from 'type-graphql';
+import Container, { Service } from 'typedi';
 
 import { ResourceNotFoundError } from '~/shared/types';
 
 import { AccountsService } from '../services';
-import { Account } from '../types'
+import { Account } from '../types';
 import { NubankEventListener } from './listener';
 import { NubankService } from './service';
 
@@ -38,7 +38,7 @@ export class NubankAccountVerificationInput {
 @ObjectType()
 export class NubankLoginResponse {
   @Field((_type) => String)
-  sentTo: string
+  sentTo: string;
 }
 
 @Service()
@@ -65,7 +65,7 @@ export class NubankResolvers {
   ): Promise<Account> {
     const account = await this.accountsService.getAccountById(input.accountId);
     if (!account) {
-      throw new ResourceNotFoundError('The account provided does not exist.')
+      throw new ResourceNotFoundError('The account provided does not exist.');
     }
     const { cert, certCrypto, authState } = await this.nubankService.verifyAccount(input);
     account.connectionDetails = JSON.stringify({
