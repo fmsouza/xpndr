@@ -46,6 +46,7 @@
   },
   "lint-staged": {
     "*.{js,json,md,ts}": [
+      "prisma format",
       "npm run lint --fix",
       "prettier --write",
       "git add"
