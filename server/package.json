@@ -46,7 +46,7 @@
   },
   "lint-staged": {
     "*.{js,json,md,ts}": [
-      "npm run lint",
+      "npm run lint --fix",
       "prettier --write",
       "git add"
     ]
