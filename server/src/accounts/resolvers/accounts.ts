@@ -27,13 +27,13 @@ Container.get(AccountsEventListener);
 
 @InputType()
 export class AccountCreateInput {
-  @Field() title: string;
-  @Field() accountType: AccountType;
+  @Field((_type) => String) title: string;
+  @Field((_type) => AccountType) accountType: AccountType;
 }
 
 @InputType()
 export class AccountSyncInput {
-  @Field() accountId: number;
+  @Field((_type) => Number) accountId: number;
 }
 
 @Service()
@@ -57,7 +57,7 @@ export class AccountsResolvers {
   public async createAccount(
     @Ctx() { user }: Context,
     @Arg('input') input: AccountCreateInput,
-  ): Promise<Account> {
+  ) {
     return this.accountsService.createAccount({
       ...input,
       user
@@ -70,7 +70,7 @@ export class AccountsResolvers {
     @Arg('input') input: AccountSyncInput,
   ): Promise<boolean> {
     const { accountId } = input;
-    const account: Account | null = await this.accountsService.getAccountById(accountId);
+    const account = await this.accountsService.getAccountById(accountId);
     if (!account) {
       throw new ResourceNotFoundError('This account does not exist.');
     }
