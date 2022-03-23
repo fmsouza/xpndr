@@ -10,7 +10,15 @@ export class AccountTransactionsService {
     private readonly accountTransactionsRepository: AccountTransactionsRepository
   ) { }
 
-  public createAccountTransaction(transaction: Omit<AccountTransaction, 'id' | 'deletedAt' | 'account' | 'category'>): Promise<AccountTransaction> {
+  public createAccountTransaction(transaction: Omit<AccountTransaction, 'id' | 'account'>): Promise<AccountTransaction> {
     return this.accountTransactionsRepository.createAccountTransaction(transaction);
+  }
+
+  public async bulkCreateAccountTransactions(transactions: Array<Omit<AccountTransaction, 'id' | 'account'>>): Promise<void> {
+    return this.accountTransactionsRepository.bulkCreateAccountTransactions(transactions);
+  }
+
+  public getTransactionsByAccountId(accountId: number): Promise<AccountTransaction[]> {
+    return this.accountTransactionsRepository.getTransactionsByAccountId(accountId);
   }
 }

@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = "file:./dev.db?socket_timeout=10&connection_limit=1"
 }
 
 model User {
@@ -53,20 +53,17 @@ model AccountType {
 model AccountTransaction {
   id          Int       @id @default(autoincrement())
   externalId  String
-  amount      Int
   title       String
-  details     String?
-  origin      String?
-  destination String?
+  amount      Int
+  type        String
+  movement    String
   createdAt   DateTime
-  deletedAt   DateTime?
 
   accountId Int
   account   Account @relation(fields: [accountId], references: [id])
 
-  categoryId Int
-  category   Category @relation(fields: [categoryId], references: [id])
-
+  @@unique(fields: [externalId])
+  @@index([externalId])
   @@map("transactions_account")
 }
 
@@ -74,23 +71,17 @@ model CreditCardTransaction {
   id         Int       @id @default(autoincrement())
   externalId String
   amount     Int
+  installments Int?
   title      String
-  details    String?
+  category   String
+  isForeign  Boolean
+  online     Boolean
   createdAt  DateTime
-  deletedAt  DateTime?
 
   accountId Int
   account   Account @relation(fields: [accountId], references: [id])
 
-  categoryId Int
-  category   Category @relation(fields: [categoryId], references: [id])
-
+  @@unique(fields: [externalId])
+  @@index([externalId])
   @@map("transactions_credit_card")
-}
-
-model Category {
-  id                    Int                     @id @default(autoincrement())
-  title                 String                  @unique
-  AccountTransaction    AccountTransaction[]
-  CreditCardTransaction CreditCardTransaction[]
 }

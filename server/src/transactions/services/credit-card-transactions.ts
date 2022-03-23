@@ -10,7 +10,15 @@ export class CreditCardTransactionsService {
     private readonly creditCardTransactionsRepository: CreditCardTransactionsRepository
   ) { }
 
-  public createCreditCardTransaction(transaction: Omit<CreditCardTransaction, 'id' | 'deletedAt' | 'account' | 'category'>): Promise<CreditCardTransaction> {
+  public createCreditCardTransaction(transaction: Omit<CreditCardTransaction, 'id' | 'account'>): Promise<CreditCardTransaction> {
     return this.creditCardTransactionsRepository.createCreditCardTransaction(transaction);
+  }
+
+  public async bulkCreateCreditCardTransactions(transactions: Array<Omit<CreditCardTransaction, 'id' | 'account'>>): Promise<void> {
+    return this.creditCardTransactionsRepository.bulkCreateCreditCardTransactions(transactions);
+  }
+
+  public getTransactionsByAccountId(accountId: number): Promise<CreditCardTransaction[]> {
+    return this.creditCardTransactionsRepository.getTransactionsByAccountId(accountId);
   }
 }

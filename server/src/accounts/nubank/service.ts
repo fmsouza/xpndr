@@ -1,8 +1,11 @@
 import { Service } from "typedi";
 import cache from 'memory-cache';
-import {NubankApi} from 'nubank-api';
+import {AccountTransaction, CardTransaction, NubankApi} from 'nubank-api';
 
 import { sha256 } from "~/shared/utils";
+
+import { Account } from "../types";
+import { CredentialsNotFoundError } from "../errors";
 
 const EXPIRES_IN_TEN_MINUTES = 600_000;
 
@@ -46,5 +49,29 @@ export class NubankService {
       ...certificates,
       authState: api.authState
     };
+  }
+
+  public async getCreditCardTransactions(account: Account): Promise<CardTransaction[]> {
+    if (!account.connectionDetails) {
+      throw new CredentialsNotFoundError(`[account:${account.id}] The credentials to access this account are not set.`);
+    }
+    const { cert, ...credentials } = JSON.parse(account.connectionDetails);
+    const api: NubankApi = new NubankApi({
+      ...credentials.authState,
+      cert: Buffer.from(cert, 'hex')
+    });
+    return api.card.getTransactions();
+  }
+
+  public async getAccountTransactions(account: Account): Promise<AccountTransaction[]> {
+    if (!account.connectionDetails) {
+      throw new CredentialsNotFoundError(`[account:${account.id}] The credentials to access this account are not set.`);
+    }
+    const { cert, ...credentials } = JSON.parse(account.connectionDetails);
+    const api: NubankApi = new NubankApi({
+      ...credentials.authState,
+      cert: Buffer.from(cert, 'hex')
+    });
+    return api.account.getTransactions();
   }
 }
