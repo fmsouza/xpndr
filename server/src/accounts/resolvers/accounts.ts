@@ -21,7 +21,6 @@ import { QueueEvent, ResourceNotFoundError } from '~/shared/types';
 
 import { AccountsService } from '../services';
 import { Account, AccountType } from '../types';
-import { AccountTypesService } from '../services';
 import { AccountsEventListener } from '../listener';
 
 Container.get(AccountsEventListener);
@@ -29,7 +28,7 @@ Container.get(AccountsEventListener);
 @InputType()
 export class AccountCreateInput {
   @Field() title: string;
-  @Field() accountTypeId: number;
+  @Field() accountType: AccountType;
 }
 
 @InputType()
@@ -42,7 +41,6 @@ export class AccountSyncInput {
 export class AccountsResolvers {
   public constructor(
     @Inject(QUEUE_TOKEN) private readonly queue: EventEmitter,
-    private readonly accountTypesService: AccountTypesService,
     private readonly accountsService: AccountsService,
     private readonly usersService: UsersService,
   ) {}
@@ -78,12 +76,6 @@ export class AccountsResolvers {
     }
     this.queue.emit(QueueEvent.ACCOUNT_SYNC, account);
     return true;
-  }
-
-  @Authorized()
-  @FieldResolver(() => [AccountType])
-  public async accountType(@Root() account: Account) {
-    return this.accountTypesService.getAccountTypeById(account.accountTypeId);
   }
 
   @Authorized()

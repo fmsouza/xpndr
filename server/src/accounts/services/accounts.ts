@@ -4,18 +4,19 @@ import { Service } from "typedi";
 import { User } from "~/users/types";
 
 import { AccountsRepository } from "../repositories";
+import { AccountType } from "../types";
 
 @Service()
 export class AccountsService {
 
   public constructor(private readonly accountsRepository: AccountsRepository) { }
 
-  public async createAccount(input: { title: string, accountTypeId: number, user: User }): Promise<Account> {
-    const { title, accountTypeId, user } = input;
+  public async createAccount(input: { title: string, accountType: AccountType, user: User }): Promise<Account> {
+    const { title, accountType, user } = input;
 
     return this.accountsRepository.createAccount({
       title,
-      accountTypeId,
+      accountType,
       ownerId: user.id,
     });
   }

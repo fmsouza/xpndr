@@ -29,25 +29,14 @@ model Account {
   updatedAt         DateTime  @updatedAt
   deletedAt         DateTime?
   connectionDetails String?
+  accountType       String
 
-  accountTypeId          Int
-  accountType            AccountType             @relation(fields: [accountTypeId], references: [id])
   ownerId                Int
   owner                  User?                   @relation(fields: [ownerId], references: [id])
   accountTransactions    AccountTransaction[]
   creditCardTransactions CreditCardTransaction[]
 
   @@map("accounts")
-}
-
-model AccountType {
-  id      Int     @id @default(autoincrement())
-  title   String
-  enabled Boolean @default(false)
-
-  accounts Account[]
-
-  @@map("account_types")
 }
 
 model AccountTransaction {

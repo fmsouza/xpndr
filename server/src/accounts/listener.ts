@@ -4,7 +4,7 @@ import { QueueEvent } from "~/shared/types";
 
 import { QUEUE_TOKEN } from "~/tokens";
 
-import { Account } from "./types";
+import { Account, AccountType } from "./types";
 
 @Service()
 export class AccountsEventListener {
@@ -14,8 +14,8 @@ export class AccountsEventListener {
   }
 
   private async syncAccount(account: Account): Promise<void> {
-    switch (account.accountTypeId) {
-      case 1: // Nubank
+    switch (account.accountType) {
+      case AccountType.NUBANK:
         this.queue.emit(QueueEvent.NUBANK_SYNC, account);
         break;
     }

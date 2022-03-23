@@ -2,17 +2,18 @@ import { Account, PrismaClient } from "@prisma/client";
 import { Inject, Service } from "typedi";
 
 import { PRISMA_TOKEN } from "~/tokens";
+import { AccountType } from "../types";
 
 @Service()
 export class AccountsRepository {
 
   public constructor(@Inject(PRISMA_TOKEN) private readonly prisma: PrismaClient) { }
 
-  public async createAccount(input: { title: string, accountTypeId: number, ownerId: number }): Promise<Account> {
+  public async createAccount(input: { title: string, accountType: AccountType, ownerId: number }): Promise<Account> {
     return this.prisma.account.create({
       data: {
         title: input.title,
-        accountTypeId: input.accountTypeId,
+        accountType: input.accountType,
         ownerId: input.ownerId
       },
     });
