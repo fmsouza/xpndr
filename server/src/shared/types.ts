@@ -1,9 +1,11 @@
 import { ApolloError } from 'apollo-server';
+import { registerEnumType } from 'type-graphql';
 
 export enum SortOrder {
   asc = 'asc',
   desc = 'desc',
 }
+registerEnumType(SortOrder, { name: 'SortOrder' });
 
 export type Globals = {
   JWT_SECRET: string

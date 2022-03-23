@@ -18,7 +18,7 @@ import { CreditCardTransaction } from '../types';
 
 @InputType()
 export class CreditCardTransactionsInput {
-  @Field() accountId: number;
+  @Field((_type) => Number) accountId: number;
 }
 
 @Service()
@@ -30,14 +30,14 @@ export class CreditCardTransactionsResolvers {
   ) {}
 
   @Authorized()
-  @Query(() => [CreditCardTransaction])
+  @Query((_returns) => [CreditCardTransaction])
   public async creditCardTransactions(@Arg('input') input: CreditCardTransactionsInput) {
     const { accountId } = input;
     return this.creditCardTransactionsService.getTransactionsByAccountId(accountId);
   }
 
   @Authorized()
-  @FieldResolver(() => [Account])
+  @FieldResolver((_returns) => [Account])
   public async account(@Root() transaction: CreditCardTransaction) {
     return this.accountsService.getAccountById(transaction.accountId);
   }

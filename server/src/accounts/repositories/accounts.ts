@@ -2,6 +2,7 @@ import { Account, PrismaClient } from "@prisma/client";
 import { Inject, Service } from "typedi";
 
 import { PRISMA_TOKEN } from "~/tokens";
+
 import { AccountType } from "../types";
 
 @Service()

@@ -20,25 +20,24 @@ Container.get(NubankEventListener);
 
 @InputType()
 export class NubankAuthenticationInput {
-  @Field() accountId: number;
-  @Field() cpf: string;
-  @Field() password: string;
-  @Field() deviceId: string;
+  @Field((_type) => Number) accountId: number;
+  @Field((_type) => String) cpf: string;
+  @Field((_type) => String) password: string;
+  @Field((_type) => String) deviceId: string;
 }
 
 @InputType()
 export class NubankAccountVerificationInput {
-  @Field() accountId: number;
-  @Field() cpf: string;
-  @Field() password: string;
-  @Field() deviceId: string;
-  @Field() authCode: string;
+  @Field((_type) => Number) accountId: number;
+  @Field((_type) => String) cpf: string;
+  @Field((_type) => String) password: string;
+  @Field((_type) => String) deviceId: string;
+  @Field((_type) => String) authCode: string;
 }
 
 @ObjectType()
 export class NubankLoginResponse {
-  @Field((_type) => String)
-  sentTo: string;
+  @Field((_type) => String) sentTo: string;
 }
 
 @Service()
@@ -62,7 +61,7 @@ export class NubankResolvers {
   @Mutation((_returns) => Account)
   public async nubankVerifyAccount(
     @Arg('input') input: NubankAccountVerificationInput,
-  ): Promise<Account> {
+  ) {
     const account = await this.accountsService.getAccountById(input.accountId);
     if (!account) {
       throw new ResourceNotFoundError('The account provided does not exist.');

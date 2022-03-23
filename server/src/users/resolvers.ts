@@ -17,15 +17,15 @@ import { AuthService, UsersService } from './services';
 
 @InputType()
 export class UserCreateInput {
-  @Field() email: string;
-  @Field() name: string;
-  @Field() password: string;
+  @Field((_type) => String) email: string;
+  @Field((_type) => String) name: string;
+  @Field((_type) => String) password: string;
 }
 
 @InputType()
 export class UserLoginInput {
-  @Field() email: string;
-  @Field() password: string;
+  @Field((_type) => String) email: string;
+  @Field((_type) => String) password: string;
 }
 
 @Service()
@@ -37,7 +37,7 @@ export class UsersResolvers {
   ) { }
 
   @Authorized()
-  @Query(() => User)
+  @Query((_returns) => User)
   public async me(@Ctx() context: Context) {
     const { user } = context;
     return this.usersService.getUserById(user.id);

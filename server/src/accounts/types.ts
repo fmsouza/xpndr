@@ -14,10 +14,8 @@ export class Account {
   ownerId: number;
   @Field((_type) => User) owner?: User;
 
-
   connectionDetails?: string | null;
 }
-
 
 export enum AccountType {
   NUBANK = 'nubank'

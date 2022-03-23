@@ -46,8 +46,8 @@ export class AccountsResolvers {
   ) {}
 
   @Authorized()
-  @Query(() => [Account])
-  async accounts(@Ctx() context: Context) {
+  @Query((_returns) => [Account])
+  public async accounts(@Ctx() context: Context) {
     const { user } = context;
     return this.accountsService.getAccountsByUserId(user.id);
   }
@@ -79,7 +79,7 @@ export class AccountsResolvers {
   }
 
   @Authorized()
-  @FieldResolver(() => [User])
+  @FieldResolver((_returns) => [User])
   public async owner(@Root() account: Account) {
     return this.usersService.getUserById(account.ownerId);
   }
