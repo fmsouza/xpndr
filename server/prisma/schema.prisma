@@ -40,13 +40,13 @@ model Account {
 }
 
 model AccountTransaction {
-  id          Int       @id @default(autoincrement())
-  externalId  String
-  title       String
-  amount      Int
-  type        String
-  movement    String
-  createdAt   DateTime
+  id         Int      @id @default(autoincrement())
+  externalId String
+  title      String
+  amount     Int
+  type       String
+  movement   String
+  createdAt  DateTime
 
   accountId Int
   account   Account @relation(fields: [accountId], references: [id])
@@ -57,15 +57,15 @@ model AccountTransaction {
 }
 
 model CreditCardTransaction {
-  id         Int       @id @default(autoincrement())
-  externalId String
-  amount     Int
+  id           Int      @id @default(autoincrement())
+  externalId   String
+  amount       Int
   installments Int?
-  title      String
-  category   String
-  isForeign  Boolean
-  online     Boolean
-  createdAt  DateTime
+  title        String
+  category     String
+  isForeign    Boolean
+  online       Boolean
+  createdAt    DateTime
 
   accountId Int
   account   Account @relation(fields: [accountId], references: [id])
