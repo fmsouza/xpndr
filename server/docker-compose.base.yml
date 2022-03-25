@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  backend:
+    command: npm start
+    restart: unless-stopped
+    build:
+      context: .
+    ports:
+      - 4000
+    environment:
+      - NODE_ENV
+      - PORT
+      - JWT_SECRET
+      - JWT_ALGORITHM
+      - JWT_EXPIRES_IN

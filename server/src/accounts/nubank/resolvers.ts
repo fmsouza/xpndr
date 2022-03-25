@@ -9,7 +9,7 @@ import {
 } from 'type-graphql';
 import Container, { Service } from 'typedi';
 
-import { ResourceNotFoundError } from '~/shared/types';
+import { ResourceNotFoundError } from "~/shared/errors";
 
 import { AccountsService } from '../services';
 import { Account } from '../types';

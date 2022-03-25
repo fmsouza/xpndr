@@ -17,7 +17,8 @@ import { Context } from '~/context';
 import { User } from '~/users/types';
 import { UsersService } from '~/users/services';
 import { QUEUE_TOKEN } from '~/tokens';
-import { QueueEvent, ResourceNotFoundError } from '~/shared/types';
+import { QueueEvent } from '~/shared/types';
+import { ResourceNotFoundError } from "~/shared/errors";
 
 import { AccountsService } from '../services';
 import { Account, AccountType } from '../types';
