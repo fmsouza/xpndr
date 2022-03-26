@@ -9,6 +9,8 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
+    volumes:
+    - xpndr-db-data:/var/lib/postgresql
   backend:
     command: npm start
     restart: unless-stopped
@@ -26,3 +28,6 @@ services:
       - JWT_ALGORITHM
       - JWT_EXPIRES_IN
       - POSTGRES_URL
+  
+volumes:
+  xpndr-db-data:
