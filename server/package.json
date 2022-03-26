@@ -9,7 +9,8 @@
     "start:dev": "concurrently \"npm:prisma:generate:watch\" \"npm:dev\"",
     "start:local": "npm run dc:local up backend",
     "lint": "eslint src",
-    "migrate:dev": "prisma migrate dev"
+    "migrate:dev": "prisma migrate dev",
+    "test": "exit 0"
   },
   "dependencies": {
     "@prisma/client": "^3.11.0",

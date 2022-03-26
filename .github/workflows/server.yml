@@ -1,0 +1,33 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Test and Build (Server)
+
+on:
+  push:
+    paths:
+      - 'server/**'
+    branches: [main]
+  pull_request:
+    paths:
+      - 'server/**'
+    branches: [main]
+
+jobs:
+  install-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          npm ci
+      - name: Run tests
+        run: |
+          npm test
+        env:
+          CI: true
