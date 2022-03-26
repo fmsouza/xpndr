@@ -41,10 +41,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type LoginFormProps = {
+  loading: boolean;
   onSubmit: (form: { [key: string]: any }) => void;
 };
 
-export const LoginForm = ({ onSubmit }: LoginFormProps) => {
+export const LoginForm = ({ loading, onSubmit }: LoginFormProps) => {
   const styles = useStyles();
   const { getText } = useText();
   const { handleSubmit, control } = useLoginForm();
@@ -69,6 +70,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
         style={styles.button}
         title={getText('actions.submit')}
         onPress={handleSubmit(onSubmit)}
+        disabled={loading}
       />
     </View>
   );

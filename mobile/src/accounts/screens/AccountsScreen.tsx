@@ -2,13 +2,14 @@ import React, { useCallback, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 
-import { Container, IconButton } from '~/shared/components';
+import { Container, Error, IconButton, Text } from '~/shared/components';
 import { makeStyles, Theme } from '~/shared/theme';
 import { useNavigationOptions } from '~/shared/navigation';
 import { useText } from '~/accounts/intl';
 
 import { AccountCard, EmptyAccountsList } from '../components';
 import { NewAccountTypeScreen } from './NewAccountTypeScreen';
+import { useAccounts } from '../hooks';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -35,7 +36,7 @@ export const AccountsScreen = () => {
   const styles = useStyles();
   const navigation = useNavigation();
   const { getText } = useText();
-  const [accounts] = useState([]);
+  const { accounts, loading, error } = useAccounts();
 
   useNavigationOptions({
     title: getText('accounts.title'),
@@ -61,9 +62,11 @@ export const AccountsScreen = () => {
           <AccountCard account={account} />
         </View>
       ))}
-      {accounts.length === 0 && (
+      {loading ? <Text>Loading...</Text> :
+      accounts.length === 0 && (
         <EmptyAccountsList onPressNewAccount={handlePressNewAccount} />
       )}
+      {error && <Error error={error} />}
     </Container>
   );
 };

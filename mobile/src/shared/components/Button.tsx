@@ -46,6 +46,7 @@ type ButtonBaseProps = {
   onPress: (event: GestureResponderEvent) => void;
   rippleRadius?: number;
   fullWidth?: boolean;
+  disabled?: boolean;
   type?: 'text' | 'contained' | 'outline' | 'ripple-only';
   style?: any;
 };
@@ -67,6 +68,7 @@ export const Button = ({
   onPress,
   children,
   title,
+  disabled,
   rippleRadius,
   fullWidth,
   type = 'contained',
@@ -84,6 +86,7 @@ export const Button = ({
         style,
       ])}
       onPress={onPress}
+      disabled={disabled}
       android_ripple={{ radius: rippleRadius }}
     >
       {title && (
