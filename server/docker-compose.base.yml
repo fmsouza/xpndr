@@ -1,5 +1,14 @@
 version: "3.9"
 services:
+  db:
+    image: postgres:12
+    restart: always
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
   backend:
     command: npm start
     restart: unless-stopped
@@ -7,9 +16,13 @@ services:
       context: .
     ports:
       - 4000
+    working_dir: /app
+    depends_on:
+      - db
     environment:
       - NODE_ENV
       - PORT
       - JWT_SECRET
       - JWT_ALGORITHM
       - JWT_EXPIRES_IN
+      - POSTGRES_URL

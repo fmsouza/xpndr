@@ -1,23 +1,23 @@
 version: "3.9"
 services:
+  db:
+    ports:
+      - 5432:5432
+    env_file:
+      - local.env
   backend:
     command: bash -c "npm run start:dev"
     ports:
       - 4000:4000
     volumes:
       - .:/app
-    working_dir: /app
-    environment:
-      NODE_ENV: development
-      PORT: 4000
-      JWT_SECRET: j34sskj3jl
-      JWT_ALGORITHM: HS256
-      JWT_EXPIRES_IN: 1d
+    env_file:
+      - local.env
   migrate:
     image: node:16-bullseye
     command: bash -c "npm run migrate:dev"
     volumes:
       - .:/app
     working_dir: /app
-    environment:
-      NODE_ENV: development
+    env_file:
+      - local.env

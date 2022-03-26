@@ -41,9 +41,6 @@
     "prisma": "3.11.0",
     "ts-node-dev": "1.1.8"
   },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
