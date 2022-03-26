@@ -2,9 +2,10 @@
   "name": "typegraphql-example",
   "scripts": {
     "dc:local": "docker-compose -p xpndr -f docker-compose.base.yml -f docker-compose.local.yml",
-    "start:dev": "ts-node-dev -r tsconfig-paths/register --no-notify --respawn --transpile-only src/index.ts",
-    "prisma:generate": "npm prisma generate",
+    "dev": "ts-node-dev -r tsconfig-paths/register --no-notify --respawn --transpile-only src/index.ts",
+    "prisma:generate": "npx prisma generate",
     "start": "ts-node -r tsconfig-paths/register --no-notify --respawn --transpile-only src/index.ts",
+    "start:dev": "npm run prisma:generate && npm run dev",
     "start:local": "npm run dc:local up backend",
     "lint": "eslint src",
     "migrate:dev": "prisma migrate dev"
