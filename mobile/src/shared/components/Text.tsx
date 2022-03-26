@@ -6,7 +6,7 @@ import { makeStyles, Theme } from '~/shared/theme';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.colors.text,
-    fontSize: theme.text.baseSize
+    fontSize: theme.text.baseSize,
   },
 }));
 

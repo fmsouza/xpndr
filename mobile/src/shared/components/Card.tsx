@@ -5,10 +5,10 @@ import { makeStyles, Theme } from '../theme';
 import { Text } from './Text';
 
 type CardProps = {
-  style?: Partial<{}>,
-  title?: string,
-  subtitle?: string,
-  children?: ReactNode
+  style?: Partial<{}>;
+  title?: string;
+  subtitle?: string;
+  children?: ReactNode;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.dimensions.padding,
     backgroundColor: theme.colors.background,
     borderRadius: 1,
-    borderColor: 'black'
+    borderColor: 'black',
   },
   shadow: {
     shadowColor: '#000000',
-    shadowOffset: {width: -2, height: 4},
+    shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
   },
@@ -33,30 +33,38 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   title: {
     fontSize: theme.text.baseSize,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   subtitle: {
     fontSize: theme.text.baseSize - 2,
     color: '#666B6A',
-  }
+  },
 }));
 
 export const Card = ({ title, subtitle, style, children }: CardProps) => {
   const styles = useStyles();
 
   return (
-    <View style={StyleSheet.flatten([styles.container, styles.shadow, styles.elevation])}>
+    <View
+      style={StyleSheet.flatten([
+        styles.container,
+        styles.shadow,
+        styles.elevation,
+      ])}
+    >
       {title && (
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>
           {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
         </View>
       )}
-      <View style={StyleSheet.flatten([styles.content, style])}>{children}</View>
+      <View style={StyleSheet.flatten([styles.content, style])}>
+        {children}
+      </View>
     </View>
-  )
+  );
 };

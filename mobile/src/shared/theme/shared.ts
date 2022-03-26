@@ -6,7 +6,7 @@ const { width: maxWidth, height: maxHeight } = Dimensions.get('window');
 
 const viewport = {
   width: maxWidth,
-  height: maxHeight
+  height: maxHeight,
 };
 
 const dimensions = {
@@ -19,19 +19,20 @@ const dimensions = {
 const text = {
   baseSize: 14,
   header: 16,
+  jumbo: 24,
 };
 
 const navbar = {
   headerTintColor: '#fff',
   headerTitleStyle: {
     fontWeight: 'bold',
-    fontSize: text.header
-  }
+    fontSize: text.header,
+  },
 };
 
 export const SharedBaseTheme: Partial<Theme> = {
   viewport,
   dimensions,
   text,
-  navbar
+  navbar,
 };

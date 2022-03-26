@@ -3,11 +3,11 @@ export const settings = {
   items: {
     language: {
       title: 'Language',
-      subtitle: 'Change your language settings'
+      subtitle: 'Change your language settings',
     },
     darkMode: {
       title: 'Dark mode',
-      subtitle: 'Toggle the dark mode'
-    }
+      subtitle: 'Toggle the dark mode',
+    },
   },
 };

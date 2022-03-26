@@ -27,10 +27,11 @@ export type Theme = RNTheme & {
   text: {
     baseSize: number;
     header: number;
+    jumbo: number;
   };
   navbar: Partial<{
     headerStyle: Partial<{}>;
     headerTintColor?: string;
     headerTitleStyle: Partial<{}>;
-  }>
+  }>;
 };

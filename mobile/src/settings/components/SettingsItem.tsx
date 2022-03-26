@@ -5,10 +5,10 @@ import { useTheme } from '@react-navigation/native';
 import { Icon, ListItem } from '~/shared/components';
 
 type BaseSettingsItemProps = {
-  icon: string,
-  mdIcon?: boolean,
-  title: string,
-  subtitle?: string
+  icon: string;
+  mdIcon?: boolean;
+  title: string;
+  subtitle?: string;
 };
 
 type SettingsItemWithPressProps = BaseSettingsItemProps & {
@@ -25,9 +25,20 @@ type SettingsItemWithSwitchProps = BaseSettingsItemProps & {
   value?: boolean;
 };
 
-type SettingsItemProps = SettingsItemWithPressProps | SettingsItemWithSwitchProps;
+type SettingsItemProps =
+  | SettingsItemWithPressProps
+  | SettingsItemWithSwitchProps;
 
-export const SettingsItem = ({ icon, mdIcon, title, subtitle, onPress, onChange, actionType, value }: SettingsItemProps) => {
+export const SettingsItem = ({
+  icon,
+  mdIcon,
+  title,
+  subtitle,
+  onPress,
+  onChange,
+  actionType,
+  value,
+}: SettingsItemProps) => {
   const theme = useTheme();
 
   let trailing;
@@ -37,7 +48,9 @@ export const SettingsItem = ({ icon, mdIcon, title, subtitle, onPress, onChange,
 
   return (
     <ListItem
-      leading={<Icon name={icon} mdIcon={mdIcon} size={32} color={theme.colors.text} />}
+      leading={
+        <Icon name={icon} mdIcon={mdIcon} size={32} color={theme.colors.text} />
+      }
       title={title}
       subtitle={subtitle}
       onPress={onPress}

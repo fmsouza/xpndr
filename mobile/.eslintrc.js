@@ -21,6 +21,10 @@ module.exports = {
         'sonarjs/cognitive-complexity': ['error', 20],
         'import/prefer-default-export': ['off'],
         'jest/no-disabled-tests': ['off'],
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { argsIgnorePattern: '^_' },
+        ],
       },
     },
   ],

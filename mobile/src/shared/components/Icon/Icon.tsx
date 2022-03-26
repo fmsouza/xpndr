@@ -18,5 +18,12 @@ export const Icon = ({
   ...props
 }: IconProps) => {
   const IconComponent: ComponentType<any> = mdIcon ? MDIcon : MDCIcon;
-  return <IconComponent {...props} type={mdIcon ? 'md' : ''} size={size} color={color} />;
+  return (
+    <IconComponent
+      {...props}
+      type={mdIcon ? 'md' : ''}
+      size={size}
+      color={color}
+    />
+  );
 };

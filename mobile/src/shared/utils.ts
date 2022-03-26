@@ -3,5 +3,5 @@ import appData from '../../app.json';
 
 export const useAppDetails = () => ({
   name: appData.displayName,
-  version: pkgMetadata.version
+  version: pkgMetadata.version,
 });

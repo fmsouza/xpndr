@@ -1,6 +1,4 @@
-import {
-  DefaultTheme,
-} from '@react-navigation/native';
+import { DefaultTheme } from '@react-navigation/native';
 import { StatusBarStyle } from 'react-native';
 import color from 'color';
 import merge from 'lodash/merge';
@@ -15,7 +13,7 @@ const COLORS = merge(DefaultTheme.colors, {
   text: '#000000',
   invertedText: '#FFFFFF',
   border: '#666B6A',
-  ripple: '#666B6A'
+  ripple: '#666B6A',
 });
 
 const STATUS_BAR = {
@@ -30,6 +28,6 @@ export const LightTheme = <Theme>merge(SharedBaseTheme, DefaultTheme, {
     headerTintColor: '#000000',
     headerStyle: {
       backgroundColor: COLORS.primary,
-    }
-  }
+    },
+  },
 });

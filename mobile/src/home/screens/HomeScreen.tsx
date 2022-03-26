@@ -21,7 +21,7 @@ const useStyles = makeStyles((_: Theme) => ({
 export const HomeScreen = () => {
   const styles = useStyles();
   const navigation = useNavigation();
-  const {getText} = useText();
+  const { getText } = useText();
   const [count, setCount] = useState(0);
 
   useNavigationOptions({
@@ -45,8 +45,14 @@ export const HomeScreen = () => {
 
   return (
     <Container style={styles.container}>
-      <Text>{getText('actions.count')}: {count}</Text>
-      <Button type='outline' title={getText('actions.count')} onPress={handleButtonTap} />
+      <Text>
+        {getText('actions.count')}: {count}
+      </Text>
+      <Button
+        type="outline"
+        title={getText('actions.count')}
+        onPress={handleButtonTap}
+      />
       <Button title={getText('actions.next')} onPress={handleNextPagePress} />
     </Container>
   );

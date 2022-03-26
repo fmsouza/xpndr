@@ -10,7 +10,9 @@ export const VersionItem = () => {
 
   return (
     <ListItem
-      leading={<Icon name="info" mdIcon={true} size={32} color={theme.colors.text} />}
+      leading={
+        <Icon name="info" mdIcon={true} size={32} color={theme.colors.text} />
+      }
       title={app.name}
       subtitle={`Version: v${app.version}`}
       noBorder

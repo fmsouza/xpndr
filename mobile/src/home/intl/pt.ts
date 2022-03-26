@@ -1,7 +1,7 @@
 export const homePage = {
-  title: 'Página Inicial'
+  title: 'Página Inicial',
 };
 
 export const secondPage = {
-  congratulations: 'Parabéns! Você acabou de navegar para a segunda página!'
+  congratulations: 'Parabéns! Você acabou de navegar para a segunda página!',
 };

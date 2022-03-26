@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useBaseTheme } from '~/shared/theme';
 import { IntlProvider } from '~/shared/intl';
-import { initialScreen, screens } from './screens';
+import { initialScreen, screens } from '~/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ export const App = () => {
         <StatusBar {...theme.statusBar} />
         <Stack.Navigator
           initialRouteName={initialScreen}
-          screenOptions={{...theme.navbar}}
+          screenOptions={{ ...theme.navbar }}
         >
           {screens.map(screen => (
             <Stack.Screen

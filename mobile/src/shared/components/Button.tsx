@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
   },
   title: {
-    fontSize: theme.text.baseSize + 2
+    fontSize: theme.text.baseSize + 2,
   },
   'button-contained': {
     backgroundColor: theme.colors.secondary,
@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   'button-outline': {
     backgroundColor: theme.colors.background,
     borderWidth: theme.dimensions.border,
-    borderColor: theme.colors.secondary
+    borderColor: theme.colors.secondary,
   },
   'button-outline-text': {
     color: theme.colors.secondary,
-  }
+  },
 }));
 
 type ButtonBaseProps = {
@@ -47,6 +47,7 @@ type ButtonBaseProps = {
   rippleRadius?: number;
   fullWidth?: boolean;
   type?: 'text' | 'contained' | 'outline' | 'ripple-only';
+  style?: any;
 };
 
 type ButtonWithTitle = ButtonBaseProps & {
@@ -62,12 +63,13 @@ type ButtonWithChildren = ButtonBaseProps & {
 };
 
 export const Button = ({
+  style,
   onPress,
   children,
   title,
   rippleRadius,
   fullWidth,
-  type = 'contained'
+  type = 'contained',
 }: ButtonWithChildren | ButtonWithTitle) => {
   const styles = useStyles();
   const theme = useTheme() as Theme;
@@ -78,12 +80,22 @@ export const Button = ({
       style={StyleSheet.flatten([
         styles.container,
         fullWidth && styles.fullWidth,
-        styles[`button-${type}`]
+        styles[`button-${type}`],
+        style,
       ])}
       onPress={onPress}
       android_ripple={{ radius: rippleRadius }}
     >
-      {title && <Text style={StyleSheet.create([styles.title, styles[`button-${type}-text`]])}>{title}</Text>}
+      {title && (
+        <Text
+          style={StyleSheet.create([
+            styles.title,
+            styles[`button-${type}-text`],
+          ])}
+        >
+          {title}
+        </Text>
+      )}
       {children}
     </PlatformPressable>
   );

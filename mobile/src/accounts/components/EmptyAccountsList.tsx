@@ -12,22 +12,28 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
   },
   label: {
-    marginVertical: theme.dimensions.margin * 4
-  }
+    marginVertical: theme.dimensions.margin * 4,
+  },
 }));
 
 type EmptyAccountsListProps = {
-  onPressNewAccount: () => void
+  onPressNewAccount: () => void;
 };
 
-export const EmptyAccountsList = ({ onPressNewAccount }: EmptyAccountsListProps) => {
+export const EmptyAccountsList = ({
+  onPressNewAccount,
+}: EmptyAccountsListProps) => {
   const styles = useStyles();
-  const {getText} = useText();
+  const { getText } = useText();
   return (
     <View style={styles.container}>
-      <Icon name='close-outline' size={64} />
+      <Icon name="close-outline" size={64} />
       <Text style={styles.label}>{getText('accounts.noAccounts')}</Text>
-      <Button type='outline' onPress={onPressNewAccount} title={getText('accounts.actions.create')} />
+      <Button
+        type="outline"
+        onPress={onPressNewAccount}
+        title={getText('accounts.actions.create')}
+      />
     </View>
-  )
+  );
 };

@@ -43,33 +43,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   subtitle: {
     fontSize: theme.text.baseSize - 2,
-    color: color(theme.colors.text)
-      .lighten(0.9)
-      .hex()
-      .toString(),
+    color: color(theme.colors.text).lighten(0.9).hex().toString(),
   },
 }));
 
 type ListItemProps = {
-  title: string,
-  subtitle?: string,
-  onPress?: (event: GestureResponderEvent) => void,
-  leading?: ReactNode,
-  trailing?: ReactNode,
-  noBorder?: boolean,
+  title: string;
+  subtitle?: string;
+  onPress?: (event: GestureResponderEvent) => void;
+  leading?: ReactNode;
+  trailing?: ReactNode;
+  noBorder?: boolean;
 };
 
-export const ListItem = ({ leading, title, subtitle, onPress, trailing, noBorder }: ListItemProps) => {
+export const ListItem = ({
+  leading,
+  title,
+  subtitle,
+  onPress,
+  trailing,
+  noBorder,
+}: ListItemProps) => {
   const styles = useStyles();
 
   return (
     <PlatformPressable
       onPress={onPress}
       pressColor="white"
-      style={StyleSheet.flatten([
-        styles.container,
-        !noBorder && styles.border
-      ])}
+      style={StyleSheet.flatten([styles.container, !noBorder && styles.border])}
     >
       <View style={styles.leftColumn}>
         {leading && <View style={styles.leadingContainer}>{leading}</View>}

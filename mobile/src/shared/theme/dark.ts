@@ -1,6 +1,4 @@
-import {
-  DarkTheme as RNDarkTheme,
-} from '@react-navigation/native';
+import { DarkTheme as RNDarkTheme } from '@react-navigation/native';
 import { StatusBarStyle } from 'react-native';
 import color from 'color';
 import merge from 'lodash/merge';
@@ -15,7 +13,7 @@ const COLORS = merge(RNDarkTheme.colors, {
   text: '#FFFFFF',
   invertedText: '#000000',
   border: '#FFFFFF',
-  ripple: '#FFFFFF'
+  ripple: '#FFFFFF',
 });
 
 const STATUS_BAR = {
@@ -30,5 +28,5 @@ export const DarkTheme = <Theme>merge(SharedBaseTheme, RNDarkTheme, {
     headerStyle: {
       backgroundColor: COLORS.background,
     },
-  }
+  },
 });

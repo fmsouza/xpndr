@@ -22,20 +22,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   cardBox: {
     flex: 1,
     width: '100%',
-    marginBottom: theme.dimensions.margin
+    marginBottom: theme.dimensions.margin,
   },
   emptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%'
-  }
+    height: '100%',
+  },
 }));
 
 export const AccountsScreen = () => {
   const styles = useStyles();
   const navigation = useNavigation();
-  const {getText} = useText();
-  const [accounts, _] = useState([]);
+  const { getText } = useText();
+  const [accounts] = useState([]);
 
   useNavigationOptions({
     title: getText('accounts.title'),
@@ -46,16 +46,24 @@ export const AccountsScreen = () => {
 
   const handlePressNewAccount = useCallback(() => {
     navigation.navigate(NewAccountTypeScreen.route as any);
-  }, [navigation.navigate]);
+  }, [navigation]);
 
   return (
-    <Container scrollable style={StyleSheet.flatten([styles.container, accounts.length === 0 && styles.emptyContainer])}>
+    <Container
+      scrollable
+      style={StyleSheet.flatten([
+        styles.container,
+        accounts.length === 0 && styles.emptyContainer,
+      ])}
+    >
       {accounts.map((account: any, index: number) => (
         <View key={index} style={styles.cardBox}>
           <AccountCard account={account} />
         </View>
       ))}
-      {accounts.length === 0 && <EmptyAccountsList onPressNewAccount={handlePressNewAccount} />}
+      {accounts.length === 0 && (
+        <EmptyAccountsList onPressNewAccount={handlePressNewAccount} />
+      )}
     </Container>
   );
 };

@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import { IntlContext } from "./provider";
+import { IntlContext } from './provider';
 
 export const useText = (translations?: Partial<{}>) => {
   const context = useContext(IntlContext);

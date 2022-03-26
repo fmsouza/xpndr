@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const NewAccountTypeScreen = () => {
   const styles = useStyles();
-  const {getText} = useText();
+  const { getText } = useText();
 
   useNavigationOptions({
     title: getText('newAccountType.title'),

@@ -17,7 +17,7 @@ const useStyles = makeStyles((_: Theme) => ({
 export const SecondScreen = () => {
   const styles = useStyles();
   const navigation = useNavigation();
-  const {getText} = useText();
+  const { getText } = useText();
 
   useNavigationOptions({
     title: getText('secondPage.title'),

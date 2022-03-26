@@ -4,18 +4,18 @@ import renderer from 'react-test-renderer';
 
 import { Button } from '~/shared/components';
 
-import {HomeScreen} from '../HomeScreen';
+import { HomeScreen } from '../HomeScreen';
 
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
   useTheme: jest.fn(() => ({
     dimensions: {},
     colors: {},
-    text: {}
+    text: {},
   })),
   useNavigation: jest.fn(() => ({
     navigate: jest.fn(),
-    setOptions: jest.fn()
+    setOptions: jest.fn(),
   })),
 }));
 

@@ -1,10 +1,11 @@
 export const languages = {
   en: 'Inglês',
-  pt: 'Português'
+  pt: 'Português',
 };
 
 export const actions = {
   next: 'Próximo',
   back: 'Voltar',
-  count: 'Contar'
+  submit: 'Enviar',
+  count: 'Contar',
 };

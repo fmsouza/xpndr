@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 
 import { Button } from '~/shared/components';
 
-import { AccountsScreen } from '../AccountsScreen';
+import { LoginScreen } from '../LoginScreen';
 
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
@@ -20,7 +20,7 @@ jest.mock('@react-navigation/native', () => ({
 }));
 
 it('renders correctly', () => {
-  const testRenderer = renderer.create(<AccountsScreen />);
+  const testRenderer = renderer.create(<LoginScreen />);
   const instance = testRenderer.root;
   expect(instance.findAllByType(Button).length).toBe(2);
 });

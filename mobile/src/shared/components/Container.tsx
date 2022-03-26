@@ -20,13 +20,20 @@ type ContainerProps = {
   children: ReactNode;
 };
 
-export const Container = ({ children, style, scrollable, ...props }: ContainerProps) => {
+export const Container = ({
+  children,
+  style,
+  scrollable,
+  ...props
+}: ContainerProps) => {
   const styles = useStyles();
   const BaseView = scrollable ? ScrollView : View;
   const containerProps = {
     ...props,
     contentContainerStyle: scrollable ? style : {},
-    style: !scrollable ? StyleSheet.flatten([styles.container, style]) : styles.container,
+    style: !scrollable
+      ? StyleSheet.flatten([styles.container, style])
+      : styles.container,
   };
   return (
     <SafeAreaView style={styles.safeWrapper}>
