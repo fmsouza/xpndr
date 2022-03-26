@@ -12,6 +12,7 @@ services:
     volumes:
     - xpndr-db-data:/var/lib/postgresql
   backend:
+    user: node
     command: npm start
     restart: unless-stopped
     build:
