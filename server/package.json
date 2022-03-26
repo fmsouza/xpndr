@@ -4,8 +4,9 @@
     "dc:local": "docker-compose -p xpndr -f docker-compose.base.yml -f docker-compose.local.yml",
     "dev": "ts-node-dev -r tsconfig-paths/register --no-notify --respawn --transpile-only src/index.ts",
     "prisma:generate": "npx prisma generate",
+    "prisma:generate:watch": "npx prisma generate --watch",
     "start": "ts-node -r tsconfig-paths/register --no-notify --respawn --transpile-only src/index.ts",
-    "start:dev": "concurrently \"npm:prisma:generate\" \"npm:dev\"",
+    "start:dev": "concurrently \"npm:prisma:generate:watch\" \"npm:dev\"",
     "start:local": "npm run dc:local up backend",
     "lint": "eslint src",
     "migrate:dev": "prisma migrate dev"
