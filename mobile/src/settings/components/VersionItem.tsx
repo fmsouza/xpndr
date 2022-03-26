@@ -2,11 +2,11 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 
 import { Icon, ListItem } from '~/shared/components';
-import { useAppDetails } from '~/shared/utils';
+import { useConfig } from '~/shared/utils';
 
 export const VersionItem = () => {
   const theme = useTheme();
-  const app = useAppDetails();
+  const { app } = useConfig();
 
   return (
     <ListItem
