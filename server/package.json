@@ -11,7 +11,7 @@
     "migrate:dev": "prisma migrate dev"
   },
   "dependencies": {
-    "@prisma/client": "3.11.0",
+    "@prisma/client": "^3.11.0",
     "apollo-server": "3.6.4",
     "class-validator": "0.13.2",
     "graphql": "15.8.0",
@@ -40,7 +40,7 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "prettier": "^2.6.0",
-    "prisma": "3.11.0",
+    "prisma": "^3.11.0",
     "ts-node-dev": "1.1.8"
   },
   "husky": {
