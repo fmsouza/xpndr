@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { Container, Error, Text } from '~/shared/components';
 import { useNavigationOptions } from '~/shared/navigation';
@@ -7,7 +8,6 @@ import { LoginForm } from '~/auth/components';
 import { useText } from '~/auth/intl';
 import { useLogin } from '~/auth/hooks';
 import * as Auth from '~/auth/utils';
-import { useNavigation } from '@react-navigation/native';
 import { AccountsScreen } from '~/accounts/screens';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -26,21 +26,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const LoginScreen = () => {
   const styles = useStyles();
   const { getText } = useText();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const { login, accessToken, loading, error } = useLogin();
 
   useNavigationOptions({
     headerShown: false,
   });
 
-  const handleFormSubmit = useCallback(({ email, password }) => {
-    login({ email, password });
-  }, [login]);
+  const handleFormSubmit = useCallback(
+    ({ email, password }) => {
+      login({ email, password });
+    },
+    [login],
+  );
 
   useEffect(() => {
     if (accessToken) {
       Auth.setToken(accessToken);
-      navigation.navigate({ key: AccountsScreen.route });
+      navigation.navigate(AccountsScreen.route);
     }
   }, [accessToken, navigation]);
 
