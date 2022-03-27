@@ -5,7 +5,7 @@ import { BatchHttpLink } from '@apollo/client/link/batch-http';
 import * as Auth from '~/auth/utils';
 
 const httpLink = new BatchHttpLink({
-  uri: process.env.API_URL
+  uri: process.env.API_URL,
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -23,5 +23,5 @@ const cache = new InMemoryCache();
 
 export const createApolloClient = () => new ApolloClient({
   link: from([authLink, httpLink]),
-  cache
+  cache,
 });

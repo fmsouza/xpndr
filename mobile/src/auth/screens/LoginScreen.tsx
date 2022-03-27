@@ -35,7 +35,7 @@ export const LoginScreen = () => {
 
   const handleFormSubmit = useCallback(({ email, password }) => {
     login({ email, password });
-  }, []);
+  }, [login]);
 
   useEffect(() => {
     if (accessToken) {
