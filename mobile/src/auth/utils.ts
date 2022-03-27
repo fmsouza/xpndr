@@ -10,13 +10,13 @@ export async function getToken(): Promise<string> {
     try {
       // Retrieve the credentials
       const credentials = await Keychain.getGenericPassword();
-  
+
       token = (credentials && credentials.password) || DEFAULT_TOKEN;
     } catch (error) {
       token = DEFAULT_TOKEN;
     }
   }
-  
+
   return token;
 }
 

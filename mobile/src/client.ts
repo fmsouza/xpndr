@@ -1,4 +1,4 @@
-import {ApolloClient, InMemoryCache, from} from '@apollo/client';
+import { ApolloClient, InMemoryCache, from } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BatchHttpLink } from '@apollo/client/link/batch-http';
 
@@ -21,7 +21,8 @@ const authLink = setContext(async (_, { headers }) => {
 
 const cache = new InMemoryCache();
 
-export const createApolloClient = () => new ApolloClient({
-  link: from([authLink, httpLink]),
-  cache,
-});
+export const createApolloClient = () =>
+  new ApolloClient({
+    link: from([authLink, httpLink]),
+    cache,
+  });

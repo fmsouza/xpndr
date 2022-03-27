@@ -20,7 +20,7 @@ const useStyles = makeStyles((_: Theme) => ({
 
 export const HomeScreen = () => {
   const styles = useStyles();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const { getText } = useText();
   const [count, setCount] = useState(0);
 
@@ -32,7 +32,7 @@ export const HomeScreen = () => {
   });
 
   const goToSettings = () => {
-    navigation.navigate(SettingsScreen.route as any);
+    navigation.navigate(SettingsScreen.route);
   };
 
   const handleButtonTap = () => {
@@ -40,7 +40,7 @@ export const HomeScreen = () => {
   };
 
   const handleNextPagePress = () => {
-    navigation.navigate(SecondScreen.route as any);
+    navigation.navigate(SecondScreen.route);
   };
 
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from '@apollo/client';
 
 import { useBaseTheme } from '~/shared/theme';
 import { IntlProvider } from '~/shared/intl';

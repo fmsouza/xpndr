@@ -1,9 +1,11 @@
-
 import { gql, useQuery } from '@apollo/client';
 
 export const GET_ACCOUNTS_QUERY = gql`
   query GetAccounts {
     accounts {
+      id
+      title
+      accountType
     }
   }
 `;

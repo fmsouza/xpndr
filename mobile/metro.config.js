@@ -4,7 +4,7 @@
  *
  * @format
  */
-const { getDefaultConfig } = require("metro-config");
+const { getDefaultConfig } = require('metro-config');
 const { resolver: defaultResolver } = getDefaultConfig.getDefaultValues();
 
 module.exports = {
@@ -18,9 +18,6 @@ module.exports = {
   },
   resolver: {
     ...defaultResolver,
-    sourceExts: [
-      ...defaultResolver.sourceExts,
-      "cjs",
-    ],
-  }
+    sourceExts: [...defaultResolver.sourceExts, 'cjs'],
+  },
 };

@@ -22,7 +22,7 @@ export const SplashScreen = () => {
         : LoginScreen.route;
       navigation.replace(route);
     })();
-  }, []);
+  }, [navigation]);
 
   return <View />;
 };

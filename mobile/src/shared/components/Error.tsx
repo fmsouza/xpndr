@@ -16,15 +16,15 @@ const useStyles = makeStyles((_theme: Theme) => ({
     justifyContent: 'center',
   },
   message: {
-    color: 'red'
+    color: 'red',
   },
 }));
 
-export const Error = ({error}: ErrorProps) => {
+export const Error = ({ error }: ErrorProps) => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
       <Text style={styles.message}>{error.message}</Text>
     </View>
-  )
-}
+  );
+};

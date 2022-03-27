@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const AccountsScreen = () => {
   const styles = useStyles();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const { getText } = useText();
   const { accounts, loading, error } = useAccounts();
 
@@ -46,7 +46,7 @@ export const AccountsScreen = () => {
   });
 
   const handlePressNewAccount = useCallback(() => {
-    navigation.navigate(NewAccountTypeScreen.route as any);
+    navigation.navigate(NewAccountTypeScreen.route);
   }, [navigation]);
 
   return (
@@ -62,9 +62,12 @@ export const AccountsScreen = () => {
           <AccountCard account={account} />
         </View>
       ))}
-      {loading ? <Text>Loading...</Text> :
-      accounts.length === 0 && (
-        <EmptyAccountsList onPressNewAccount={handlePressNewAccount} />
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : (
+        accounts.length === 0 && (
+          <EmptyAccountsList onPressNewAccount={handlePressNewAccount} />
+        )
       )}
       {error && <Error error={error} />}
     </Container>

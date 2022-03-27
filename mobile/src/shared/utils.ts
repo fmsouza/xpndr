@@ -5,5 +5,5 @@ export const useConfig = () => ({
   app: {
     name: appData.displayName,
     version: pkgMetadata.version,
-  }
+  },
 });
