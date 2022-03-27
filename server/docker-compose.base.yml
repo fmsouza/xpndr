@@ -36,6 +36,13 @@ services:
       - JWT_ALGORITHM
       - JWT_EXPIRES_IN
       - POSTGRES_URL
+
+  migrate:
+    user: node
+    image: xpndr_backend
+    command: bash -c "npm run migrate:dev"
+    env_file:
+      - local.env
   
 volumes:
   xpndr-db-data:

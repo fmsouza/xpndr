@@ -14,9 +14,5 @@ services:
     env_file:
       - local.env
   migrate:
-    image: xpndr_backend
-    command: bash -c "npm run migrate:dev"
     volumes:
       - .:/app
-    env_file:
-      - local.env
