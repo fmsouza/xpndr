@@ -16,3 +16,5 @@ services:
   migrate:
     volumes:
       - .:/app
+    env_file:
+      - local.env
