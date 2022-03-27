@@ -14,10 +14,9 @@ services:
     env_file:
       - local.env
   migrate:
-    image: node:16-bullseye
+    image: xpndr_backend
     command: bash -c "npm run migrate:dev"
     volumes:
       - .:/app
-    working_dir: /app
     env_file:
       - local.env
