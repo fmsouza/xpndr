@@ -6,7 +6,7 @@ import { LoginScreen } from '../screens';
 
 export const useLogout = () => {
   const navigation = useNavigation<any>();
-  
+
   return async () => {
     await Auth.logout();
     navigation.replace(LoginScreen.route);
