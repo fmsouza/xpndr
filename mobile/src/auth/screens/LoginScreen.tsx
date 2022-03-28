@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 
-import { Container, Error, Text } from '~/shared/components';
+import { Container, Error, Spacing, Text } from '~/shared/components';
 import { useNavigationOptions } from '~/shared/navigation';
 import { makeStyles, Theme } from '~/shared/theme';
 import { LoginForm } from '~/auth/components';
@@ -20,6 +21,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontSize: theme.text.jumbo,
     fontWeight: 'bold',
+  },
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   },
 }));
 
@@ -50,8 +58,11 @@ export const LoginScreen = () => {
   return (
     <Container style={styles.container}>
       <Text style={styles.title}>{getText('loginPage.title')}</Text>
-      <LoginForm onSubmit={handleFormSubmit} loading={loading} />
-      {error && <Error error={error} />}
+      <View style={styles.formContainer}>
+        <LoginForm onSubmit={handleFormSubmit} loading={loading} />
+        <Spacing height={16} />
+        {error && <Error error={error} />}
+      </View>
     </Container>
   );
 };
