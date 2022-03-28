@@ -13,3 +13,4 @@ COPY --chown=node:node package.json .
 COPY --chown=node:node . .
 
 RUN npm install
+RUN chown node:node -R node_modules/.prisma
