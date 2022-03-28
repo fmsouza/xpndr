@@ -17,6 +17,12 @@ export class Account {
   connectionDetails?: string | null;
 }
 
+@ObjectType()
+export class AccountTypeItem {
+  @Field((_type) => AccountType) accountType: AccountType;
+  @Field((_type) => String) label: string;
+}
+
 export enum AccountType {
   NUBANK = 'nubank'
 }

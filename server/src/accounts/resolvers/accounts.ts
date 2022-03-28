@@ -21,7 +21,7 @@ import { QueueEvent } from '~/shared/types';
 import { ResourceNotFoundError } from "~/shared/errors";
 
 import { AccountsService } from '../services';
-import { Account, AccountType } from '../types';
+import { Account, AccountType, AccountTypeItem } from '../types';
 import { AccountsEventListener } from '../listener';
 
 Container.get(AccountsEventListener);
@@ -51,6 +51,12 @@ export class AccountsResolvers {
   public async accounts(@Ctx() context: Context) {
     const { user } = context;
     return this.accountsService.getAccountsByUserId(user.id);
+  }
+
+  @Authorized()
+  @Query((_returns) => [AccountTypeItem])
+  public async accountTypes() {
+    return this.accountsService.getAccountTypes();
   }
 
   @Authorized()

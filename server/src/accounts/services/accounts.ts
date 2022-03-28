@@ -4,7 +4,7 @@ import { Service } from "typedi";
 import { User } from "~/users/types";
 
 import { AccountsRepository } from "../repositories";
-import { AccountType } from "../types";
+import { AccountType, AccountTypeItem } from "../types";
 
 @Service()
 export class AccountsService {
@@ -31,5 +31,11 @@ export class AccountsService {
 
   public async updateAccount(account: Account): Promise<Account> {
     return this.accountsRepository.updateAccount(account);
+  }
+
+  public async getAccountTypes(): Promise<AccountTypeItem[]> {
+    return [
+      { accountType: AccountType.NUBANK, label: 'Nubank' }
+    ];
   }
 }
