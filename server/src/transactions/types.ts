@@ -32,6 +32,12 @@ export class CreditCardTransaction {
   @Field((_type) => Account) account: Account;
 }
 
+@ObjectType()
+export class ExpenseCategory {
+  @Field((_type) => Category) category: Category;
+  @Field((_type) => Number) amount: number;
+}
+
 export enum Category {
   CLOTHING = 'clothing',
   EDUCATION = 'education',

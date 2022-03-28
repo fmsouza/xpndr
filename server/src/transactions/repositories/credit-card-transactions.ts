@@ -3,6 +3,8 @@ import { Inject, Service } from "typedi";
 
 import { PRISMA_TOKEN } from "~/tokens";
 
+import { Category, ExpenseCategory } from "../types";
+
 @Service()
 export class CreditCardTransactionsRepository {
 
@@ -28,5 +30,28 @@ export class CreditCardTransactionsRepository {
         accountId
       }
     });
+  }
+
+  public async aggregateByCategory(filters: { accountId: number, startDate: Date, endDate: Date}): Promise<ExpenseCategory[]> {
+    const { accountId, startDate, endDate } = filters;
+    return (await this.prisma.creditCardTransaction.groupBy({
+      by: ['category'],
+      where: {
+        accountId,
+        createdAt: {
+          gte: startDate,
+          lt: endDate
+        }
+      },
+      _sum: {
+        amount: true
+      },
+      orderBy: {
+        category: 'asc'
+      }
+    })).map(item => ({
+      category: item.category as Category,
+      amount: item._sum.amount ?? 0
+    }));
   }
 }
