@@ -8,20 +8,27 @@ import { Button, TextInput } from '~/shared/components';
 import { makeStyles, Theme } from '~/shared/theme';
 import { useText } from '~/auth/intl';
 
-const loginSchema = yup.object().shape({
+const signupSchema = yup.object().shape({
   email: yup.string().required(),
   password: yup.string().required(),
+  confirmPassword: yup
+    .mixed()
+    .test('match', 'Passwords do not match', function () {
+      return this.parent.password === this.parent.confirmPassword;
+    }),
 });
 
 const DEFAULT_VALUES = {
   email: '',
+  name: '',
   password: '',
+  passwordConfirm: '',
 };
 
-const useLoginForm = () =>
+const useSignupForm = () =>
   useForm({
     defaultValues: DEFAULT_VALUES,
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(signupSchema),
   });
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -40,35 +47,43 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type LoginFormProps = {
+type SignupFormProps = {
   loading: boolean;
   onSubmit: (form: { [key: string]: any }) => void;
-  onRegister: () => void;
 };
 
-export const LoginForm = ({
-  loading,
-  onSubmit,
-  onRegister,
-}: LoginFormProps) => {
+export const SignupForm = ({ loading, onSubmit }: SignupFormProps) => {
   const styles = useStyles();
   const { getText } = useText();
-  const { handleSubmit, control } = useLoginForm();
+  const { handleSubmit, control } = useSignupForm();
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         control={control}
+        name="name"
+        label={getText('signupForm.name')}
+      />
+      <TextInput
+        style={styles.input}
+        control={control}
         name="email"
-        label={getText('loginForm.email')}
+        label={getText('signupForm.email')}
         keyboardType="email-address"
       />
       <TextInput
         style={styles.input}
         control={control}
         name="password"
-        label={getText('loginForm.password')}
+        label={getText('signupForm.password')}
+        secureTextEntry
+      />
+      <TextInput
+        style={styles.input}
+        control={control}
+        name="confirmPassword"
+        label={getText('signupForm.confirmPassword')}
         secureTextEntry
       />
       <Button
@@ -76,13 +91,6 @@ export const LoginForm = ({
         title={getText('actions.submit')}
         onPress={handleSubmit(onSubmit)}
         disabled={loading}
-        fullWidth
-      />
-      <Button
-        style={styles.button}
-        title={getText('actions.register')}
-        onPress={onRegister}
-        type="outline"
         fullWidth
       />
     </View>

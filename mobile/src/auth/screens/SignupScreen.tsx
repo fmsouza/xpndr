@@ -5,13 +5,11 @@ import { View } from 'react-native';
 import { Container, Error, Spacing, Text } from '~/shared/components';
 import { useNavigationOptions } from '~/shared/navigation';
 import { makeStyles, Theme } from '~/shared/theme';
-import { LoginForm } from '~/auth/components';
+import { SignupForm } from '~/auth/components';
 import { useText } from '~/auth/intl';
-import { useLogin } from '~/auth/hooks';
-import * as Auth from '~/auth/utils';
-import { AccountsScreen } from '~/accounts/screens';
 
-import { SignupScreen } from './SignupScreen';
+import { useSignup } from '../hooks';
+import { LoginScreen } from './LoginScreen';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -33,43 +31,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const LoginScreen = () => {
+export const SignupScreen = () => {
   const styles = useStyles();
   const { getText } = useText();
   const navigation = useNavigation<any>();
-  const { login, accessToken, loading, error } = useLogin();
+  const { signup, success, loading, error } = useSignup();
 
   useNavigationOptions({
     headerShown: false,
   });
 
   const handleFormSubmit = useCallback(
-    ({ email, password }) => {
-      login({ email, password });
+    ({ email, name, password }) => {
+      signup({ email, name, password });
     },
-    [login],
+    [signup],
   );
 
-  const handleRegister = useCallback(() => {
-    navigation.navigate(SignupScreen.route);
-  }, [navigation]);
-
   useEffect(() => {
-    if (accessToken) {
-      Auth.setToken(accessToken);
-      navigation.replace(AccountsScreen.route);
+    if (success) {
+      navigation.replace(LoginScreen.route);
     }
-  }, [accessToken, navigation]);
+  }, [success, navigation]);
 
   return (
     <Container style={styles.container}>
-      <Text style={styles.title}>{getText('loginPage.title')}</Text>
+      <Text style={styles.title}>{getText('signupPage.title')}</Text>
       <View style={styles.formContainer}>
-        <LoginForm
-          onSubmit={handleFormSubmit}
-          onRegister={handleRegister}
-          loading={loading}
-        />
+        <SignupForm onSubmit={handleFormSubmit} loading={loading} />
         <Spacing height={16} />
         {error && <Error error={error} />}
       </View>
@@ -77,4 +66,4 @@ export const LoginScreen = () => {
   );
 };
 
-LoginScreen.route = 'Login';
+SignupScreen.route = 'Signup';
