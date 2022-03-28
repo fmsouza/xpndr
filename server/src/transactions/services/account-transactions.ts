@@ -21,4 +21,12 @@ export class AccountTransactionsService {
   public getTransactionsByAccountId(accountId: number): Promise<AccountTransaction[]> {
     return this.accountTransactionsRepository.getTransactionsByAccountId(accountId);
   }
+
+  public hasTransactionsBefore(filters: { accountId: number, date: Date}): Promise<boolean> {
+    return this.accountTransactionsRepository.hasTransactionsBefore(filters);
+  }
+
+  public hasTransactionsAfter(filters: { accountId: number, date: Date}): Promise<boolean> {
+    return this.accountTransactionsRepository.hasTransactionsAfter(filters);
+  }
 }

@@ -32,6 +32,32 @@ export class CreditCardTransactionsRepository {
     });
   }
 
+  public async hasTransactionsBefore(filters: { accountId: number, date: Date}): Promise<boolean> {
+    const { accountId, date } = filters;
+    const count = await this.prisma.creditCardTransaction.count({
+      where: {
+        accountId,
+        createdAt: {
+          lt: date
+        }
+      }
+    });
+    return count > 0;
+  }
+
+  public async hasTransactionsAfter(filters: { accountId: number, date: Date}): Promise<boolean> {
+    const { accountId, date } = filters;
+    const count = await this.prisma.creditCardTransaction.count({
+      where: {
+        accountId,
+        createdAt: {
+          gt: date
+        }
+      }
+    });
+    return count > 0;
+  }
+
   public async aggregateByCategory(filters: { accountId: number, startDate: Date, endDate: Date}): Promise<ExpenseCategory[]> {
     const { accountId, startDate, endDate } = filters;
     return (await this.prisma.creditCardTransaction.groupBy({

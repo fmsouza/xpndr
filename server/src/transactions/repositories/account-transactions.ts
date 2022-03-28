@@ -29,4 +29,30 @@ export class AccountTransactionsRepository {
       }
     });
   }
+
+  public async hasTransactionsBefore(filters: { accountId: number, date: Date}): Promise<boolean> {
+    const { accountId, date } = filters;
+    const count = await this.prisma.accountTransaction.count({
+      where: {
+        accountId,
+        createdAt: {
+          lt: date
+        }
+      }
+    });
+    return count > 0;
+  }
+
+  public async hasTransactionsAfter(filters: { accountId: number, date: Date}): Promise<boolean> {
+    const { accountId, date } = filters;
+    const count = await this.prisma.accountTransaction.count({
+      where: {
+        accountId,
+        createdAt: {
+          gt: date
+        }
+      }
+    });
+    return count > 0;
+  }
 }

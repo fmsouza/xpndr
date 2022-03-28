@@ -23,6 +23,14 @@ export class CreditCardTransactionsService {
     return this.creditCardTransactionsRepository.getTransactionsByAccountId(accountId);
   }
 
+  public hasTransactionsBefore(filters: { accountId: number, date: Date}): Promise<boolean> {
+    return this.creditCardTransactionsRepository.hasTransactionsBefore(filters);
+  }
+
+  public hasTransactionsAfter(filters: { accountId: number, date: Date}): Promise<boolean> {
+    return this.creditCardTransactionsRepository.hasTransactionsAfter(filters);
+  }
+
   public aggregateByCategory(filters: { accountId: number, startDate: Date, endDate: Date}): Promise<ExpenseCategory[]> {
     return this.creditCardTransactionsRepository.aggregateByCategory(filters);
   }
