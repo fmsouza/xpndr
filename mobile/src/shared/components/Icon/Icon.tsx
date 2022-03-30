@@ -13,12 +13,7 @@ export type IconProps = {
   onPress?: (event: GestureResponderEvent) => void;
 };
 
-export const Icon = ({
-  mdIcon,
-  size = 24,
-  color,
-  ...props
-}: IconProps) => {
+export const Icon = ({ mdIcon, size = 24, color, ...props }: IconProps) => {
   const theme = useTheme();
   const IconComponent: ComponentType<any> = mdIcon ? MDIcon : MDCIcon;
 

@@ -1,15 +1,17 @@
 import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
+import { PlatformPressable } from '@react-navigation/elements';
 
 import { Container, Error, IconButton, Loading } from '~/shared/components';
 import { makeStyles, Theme } from '~/shared/theme';
 import { useNavigationOptions } from '~/shared/navigation';
 import { useText } from '~/accounts/intl';
+import { DashboardScreen } from '~/dashboard/screens';
+import { useAccounts } from '~/accounts/hooks';
+import { AccountCard, EmptyAccountsList } from '~/accounts/components';
 
-import { AccountCard, EmptyAccountsList } from '../components';
 import { SelectAccountTypeScreen } from './SelectAccountTypeScreen';
-import { useAccounts } from '../hooks';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -49,6 +51,13 @@ export const AccountsScreen = () => {
     navigation.navigate(SelectAccountTypeScreen.route);
   }, [navigation]);
 
+  const handlePressSelectAccount = useCallback(
+    (account: { id: number }) => {
+      navigation.navigate(DashboardScreen.route, { accountId: account.id });
+    },
+    [navigation],
+  );
+
   return (
     <Container
       scrollable
@@ -66,7 +75,11 @@ export const AccountsScreen = () => {
         <>
           {accounts.map((account: any, index: number) => (
             <View key={index} style={styles.cardBox}>
-              <AccountCard account={account} />
+              <PlatformPressable
+                onPress={() => handlePressSelectAccount(account)}
+              >
+                <AccountCard account={account} />
+              </PlatformPressable>
             </View>
           ))}
         </>

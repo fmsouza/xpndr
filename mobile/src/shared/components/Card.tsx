@@ -4,13 +4,6 @@ import { StyleSheet, View } from 'react-native';
 import { makeStyles, Theme } from '../theme';
 import { Text } from './Text';
 
-type CardProps = {
-  style?: Partial<{}>;
-  title?: string;
-  subtitle?: string;
-  children?: ReactNode;
-};
-
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     width: '100%',
@@ -44,6 +37,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: '#666B6A',
   },
 }));
+
+type CardProps = {
+  style?: Partial<{}>;
+  title?: string;
+  subtitle?: string;
+  children?: ReactNode;
+};
 
 export const Card = ({ title, subtitle, style, children }: CardProps) => {
   const styles = useStyles();

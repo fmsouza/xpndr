@@ -14,9 +14,9 @@ export const useNavigationOptions = (options: Partial<{}>) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitleStyle: {
-        color: theme.colors.text
+        color: theme.colors.text,
       },
-      ...options
+      ...options,
     });
-  }, [navigation, options]);
+  }, [navigation, options, theme]);
 };

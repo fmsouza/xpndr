@@ -47,7 +47,7 @@ type ButtonBaseProps = {
   rippleRadius?: number;
   fullWidth?: boolean;
   disabled?: boolean;
-  type?: 'text' | 'contained' | 'outline' | 'ripple-only';
+  type?: 'text' | 'contained' | 'outline' | 'ripple-only' | 'none';
   style?: any;
 };
 
