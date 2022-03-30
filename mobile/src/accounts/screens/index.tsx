@@ -1,2 +1,3 @@
 export * from './AccountsScreen';
-export * from './NewAccountTypeScreen';
+export * from './NewAccountScreen';
+export * from './SelectAccountTypeScreen';

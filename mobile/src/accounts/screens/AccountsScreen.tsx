@@ -2,13 +2,13 @@ import React, { useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 
-import { Container, Error, IconButton, Text } from '~/shared/components';
+import { Container, Error, IconButton, Loading } from '~/shared/components';
 import { makeStyles, Theme } from '~/shared/theme';
 import { useNavigationOptions } from '~/shared/navigation';
 import { useText } from '~/accounts/intl';
 
 import { AccountCard, EmptyAccountsList } from '../components';
-import { NewAccountTypeScreen } from './NewAccountTypeScreen';
+import { SelectAccountTypeScreen } from './SelectAccountTypeScreen';
 import { useAccounts } from '../hooks';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,7 +46,7 @@ export const AccountsScreen = () => {
   });
 
   const handlePressNewAccount = useCallback(() => {
-    navigation.navigate(NewAccountTypeScreen.route);
+    navigation.navigate(SelectAccountTypeScreen.route);
   }, [navigation]);
 
   return (
@@ -57,19 +57,20 @@ export const AccountsScreen = () => {
         accounts.length === 0 && styles.emptyContainer,
       ])}
     >
-      {accounts.map((account: any, index: number) => (
-        <View key={index} style={styles.cardBox}>
-          <AccountCard account={account} />
-        </View>
-      ))}
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : (
-        accounts.length === 0 && (
-          <EmptyAccountsList onPressNewAccount={handlePressNewAccount} />
-        )
-      )}
       {error && <Error error={error} />}
+      {loading ? (
+        <Loading />
+      ) : accounts.length === 0 ? (
+        <EmptyAccountsList onPressNewAccount={handlePressNewAccount} />
+      ) : (
+        <>
+          {accounts.map((account: any, index: number) => (
+            <View key={index} style={styles.cardBox}>
+              <AccountCard account={account} />
+            </View>
+          ))}
+        </>
+      )}
     </Container>
   );
 };

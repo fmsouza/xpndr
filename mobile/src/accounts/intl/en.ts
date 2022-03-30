@@ -6,6 +6,14 @@ export const accounts = {
   },
 };
 
-export const newAccountType = {
+export const selectAccountType = {
   title: 'Select Account Type',
+};
+
+export const newAccount = {
+  title: 'New Account',
+};
+
+export const createAccountForm = {
+  title: 'Title',
 };
