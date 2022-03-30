@@ -41,7 +41,7 @@ export const AccountsScreen = () => {
   useNavigationOptions({
     title: getText('accounts.title'),
     headerRight: () => (
-      <IconButton name="plus" color="black" onPress={handlePressNewAccount} />
+      <IconButton name="plus" onPress={handlePressNewAccount} />
     ),
   });
 

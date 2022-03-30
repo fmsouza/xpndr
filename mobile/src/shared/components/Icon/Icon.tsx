@@ -3,7 +3,9 @@ import { GestureResponderEvent } from 'react-native';
 import MDIcon from 'react-native-vector-icons/MaterialIcons';
 import MDCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-type IconProps = {
+import { useTheme } from '~/shared/theme';
+
+export type IconProps = {
   name: string;
   size?: number;
   color?: string;
@@ -14,16 +16,18 @@ type IconProps = {
 export const Icon = ({
   mdIcon,
   size = 24,
-  color = 'black',
+  color,
   ...props
 }: IconProps) => {
+  const theme = useTheme();
   const IconComponent: ComponentType<any> = mdIcon ? MDIcon : MDCIcon;
+
   return (
     <IconComponent
       {...props}
       type={mdIcon ? 'md' : ''}
       size={size}
-      color={color}
+      color={color ?? theme.colors.text}
     />
   );
 };
