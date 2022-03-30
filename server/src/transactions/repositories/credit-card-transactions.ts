@@ -80,4 +80,21 @@ export class CreditCardTransactionsRepository {
       amount: item._sum.amount ?? 0
     }));
   }
+
+  public async totalExpenses(filters: { accountId: number, startDate: Date, endDate: Date}): Promise<number> {
+    const { accountId, startDate, endDate } = filters;
+    const response = await this.prisma.creditCardTransaction.aggregate({
+      where: {
+        accountId,
+        createdAt: {
+          gte: startDate,
+          lt: endDate
+        }
+      },
+      _sum: {
+        amount: true
+      },
+    });
+    return response._sum.amount ?? 0;
+  }
 }

@@ -21,4 +21,10 @@ export class CreditDashboardResolvers {
   public async expensesByCategory(@Root() filters: AccountDashboardFiltersInput) {
     return this.creditCardTransactionsService.aggregateByCategory(filters);
   }
+
+  @Authorized()
+  @FieldResolver((_returns) => Number)
+  public async total(@Root() filters: AccountDashboardFiltersInput) {
+    return this.creditCardTransactionsService.totalExpenses(filters);
+  }
 }

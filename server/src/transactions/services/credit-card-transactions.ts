@@ -34,4 +34,8 @@ export class CreditCardTransactionsService {
   public aggregateByCategory(filters: { accountId: number, startDate: Date, endDate: Date}): Promise<ExpenseCategory[]> {
     return this.creditCardTransactionsRepository.aggregateByCategory(filters);
   }
+
+  public totalExpenses(filters: { accountId: number, startDate: Date, endDate: Date}): Promise<number> {
+    return this.creditCardTransactionsRepository.totalExpenses(filters);
+  }
 }
