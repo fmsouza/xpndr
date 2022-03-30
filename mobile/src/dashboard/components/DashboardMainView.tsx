@@ -1,14 +1,22 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { PieView } from './PieView';
 
 type DashboardMainViewProps = {
-  accountDashboard: {};
+  accountDashboard: {
+    credit: {
+      total: number;
+      expensesByCategory: Array<{ category: string, amount: number }>;
+    }
+  };
 };
 
 export const DashboardMainView = ({
   accountDashboard,
 }: DashboardMainViewProps) => {
-  console.log(accountDashboard);
-
-  return <View />;
+  return (
+    <View>
+      <PieView items={accountDashboard.credit.expensesByCategory} total={accountDashboard.credit.total} />
+    </View>
+  );
 };
