@@ -46,7 +46,6 @@ export const NewAccountScreen = ({
 
   const handleFormSubmit = useCallback(
     ({ title }) => {
-      console.log('Creating account...');
       createAccount({ title, accountType });
     },
     [accountType, createAccount],

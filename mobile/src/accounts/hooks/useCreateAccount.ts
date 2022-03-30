@@ -21,8 +21,7 @@ export const useCreateAccount = () => {
         if (!newAccount) return;
 
         const cached: any = cache.readQuery({ query: GET_ACCOUNTS_QUERY });
-        console.log('cached:', cached);
-        const accounts = cached.accounts ?? [];
+        const accounts = [...cached.accounts];
         accounts.push(newAccount);
 
         cache.writeQuery({

@@ -56,7 +56,7 @@ export const CreateAccountForm = ({
       <TextInput
         style={styles.input}
         control={control}
-        name="name"
+        name="title"
         label={getText('createAccountForm.title')}
       />
       <Button
