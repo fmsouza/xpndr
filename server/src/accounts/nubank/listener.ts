@@ -24,6 +24,9 @@ export class NubankEventListener {
   private async syncAccount(input: {account: Account, pincode: string}): Promise<void> {
     const { account, pincode } = input;
     console.log(`[account:${account.id}] Syncing nubank account...`);
+    if (!pincode) {
+      return console.log(`[account:${account.id}] Pincode not provided, skipping...`);
+    }
 
     const [nubankCardTransactions, nubankAccountTransactions] = await Promise.all([
       this.nubankService.getCreditCardTransactions({account, pincode}),

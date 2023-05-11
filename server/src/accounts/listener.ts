@@ -13,10 +13,11 @@ export class AccountsEventListener {
     this.queue.addListener(QueueEvent.ACCOUNT_SYNC, this.syncAccount.bind(this));
   }
 
-  private async syncAccount(account: Account): Promise<void> {
+  private async syncAccount(input: {account: Account, pincode?: string}): Promise<void> {
+    const { account, pincode } = input;
     switch (account.accountType) {
       case AccountType.NUBANK:
-        this.queue.emit(QueueEvent.NUBANK_SYNC, account);
+        this.queue.emit(QueueEvent.NUBANK_SYNC, {account, pincode});
         break;
     }
   }

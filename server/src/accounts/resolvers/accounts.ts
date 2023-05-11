@@ -35,6 +35,7 @@ export class AccountCreateInput {
 @InputType()
 export class AccountSyncInput {
   @Field((_type) => Number) accountId: number;
+  @Field((_type) => String) pincode?: string;
 }
 
 @Service()
@@ -76,12 +77,12 @@ export class AccountsResolvers {
   public async syncAccount(
     @Arg('input') input: AccountSyncInput,
   ): Promise<boolean> {
-    const { accountId } = input;
+    const { accountId, pincode } = input;
     const account = await this.accountsService.getAccountById(accountId);
     if (!account) {
       throw new ResourceNotFoundError('This account does not exist.');
     }
-    this.queue.emit(QueueEvent.ACCOUNT_SYNC, account);
+    this.queue.emit(QueueEvent.ACCOUNT_SYNC, {account, pincode});
     return true;
   }
 
