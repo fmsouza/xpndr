@@ -10,6 +10,7 @@ import {
 import Container, { Service } from 'typedi';
 
 import { ResourceNotFoundError } from "~/shared/errors";
+import { encrypt } from '~/shared/utils';
 
 import { AccountsService } from '../services';
 import { Account } from '../types';
@@ -33,6 +34,7 @@ export class NubankAccountVerificationInput {
   @Field((_type) => String) password: string;
   @Field((_type) => String) deviceId: string;
   @Field((_type) => String) authCode: string;
+  @Field((_type) => String) pincode: string;
 }
 
 @ObjectType()
@@ -67,11 +69,19 @@ export class NubankResolvers {
       throw new ResourceNotFoundError('The account provided does not exist.');
     }
     const { cert, certCrypto, authState } = await this.nubankService.verifyAccount(input);
-    account.connectionDetails = JSON.stringify({
+    
+    const connectionDetails = JSON.stringify({
       cert: cert.toString('hex'),
       certCrypto: certCrypto.toString('hex'),
       authState
     });
+
+    const secureConnectionDetails = encrypt({
+      contents: connectionDetails,
+      privateKey: input.pincode
+    });
+
+    account.connectionDetails = secureConnectionDetails;
     return this.accountsService.updateAccount(account);
   }
 }

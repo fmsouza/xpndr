@@ -1,8 +1,9 @@
 import { Service } from "typedi";
 import cache from 'memory-cache';
 import {AccountTransaction, CardTransaction, NubankApi} from 'nubank-api';
+import { AuthState } from "nubank-api/lib/utils/http";
 
-import { sha256 } from "~/shared/utils";
+import { decrypt, sha256 } from "~/shared/utils";
 
 import { Account } from "../types";
 import { CredentialsNotFoundError } from "../errors";
@@ -30,7 +31,7 @@ export class NubankService {
     return sentTo;
   }
 
-  public async verifyAccount(input: {accountId: number, cpf: string, password: string, deviceId: string, authCode: string}) {
+  public async verifyAccount(input: {accountId: number, cpf: string, password: string, deviceId: string, authCode: string}): Promise<{cert: Buffer, certCrypto: Buffer, authState: AuthState}> {
     const { accountId, cpf, password, deviceId, authCode } = input;
     const cacheKey: string = sha256(`${accountId}:${cpf}:${password}`);
     const api: NubankApi = cache.get(cacheKey);
@@ -51,26 +52,38 @@ export class NubankService {
     };
   }
 
-  public async getCreditCardTransactions(account: Account): Promise<CardTransaction[]> {
+  public async getCreditCardTransactions(input: {account: Account, pincode: string}): Promise<CardTransaction[]> {
+    const { account, pincode } = input;
     if (!account.connectionDetails) {
       throw new CredentialsNotFoundError(`[account:${account.id}] The credentials to access this account are not set.`);
     }
-    const { cert, ...credentials } = JSON.parse(account.connectionDetails);
+
+    const credentials = decrypt<{cert: string, certCrypto: string, authState: AuthState}>({
+      contents: account.connectionDetails,
+      privateKey: pincode
+    });
+
     const api: NubankApi = new NubankApi({
       ...credentials.authState,
-      cert: Buffer.from(cert, 'hex')
+      cert: Buffer.from(credentials.cert, 'hex')
     });
     return api.card.getTransactions();
   }
 
-  public async getAccountTransactions(account: Account): Promise<AccountTransaction[]> {
+  public async getAccountTransactions(input: {account: Account, pincode: string}): Promise<AccountTransaction[]> {
+    const { account, pincode } = input;
     if (!account.connectionDetails) {
       throw new CredentialsNotFoundError(`[account:${account.id}] The credentials to access this account are not set.`);
     }
-    const { cert, ...credentials } = JSON.parse(account.connectionDetails);
+
+    const credentials = decrypt<{cert: string, certCrypto: string, authState: AuthState}>({
+      contents: account.connectionDetails,
+      privateKey: pincode
+    });
+
     const api: NubankApi = new NubankApi({
       ...credentials.authState,
-      cert: Buffer.from(cert, 'hex')
+      cert: Buffer.from(credentials.cert, 'hex')
     });
     return api.account.getTransactions();
   }

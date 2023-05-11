@@ -1,4 +1,5 @@
 import { createHash } from 'crypto';
+import AES from 'crypto-js/aes';
 import { Container } from 'typedi';
 import { SignOptions, sign, verify } from 'jsonwebtoken';
 
@@ -8,6 +9,16 @@ import { Globals } from './types';
 
 export function sha256(content: string): string {
   return createHash('sha256').update(content).digest('hex');
+}
+
+export function encrypt<T>(input: {contents: T, privateKey: string}): string {
+  const { contents, privateKey } = input;
+  return AES.encrypt(JSON.stringify(contents), privateKey).toString();
+}
+
+export function decrypt<T>(input: {contents: string, privateKey: string}): T {
+  const { contents, privateKey } = input;
+  return JSON.parse(AES.decrypt(contents, privateKey).toString());
 }
 
 export function createJwt<T>(contents: T): string {

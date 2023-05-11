@@ -21,12 +21,13 @@ export class NubankEventListener {
     this.queue.addListener(QueueEvent.NUBANK_SYNC, this.syncAccount.bind(this));
   }
 
-  private async syncAccount(account: Account): Promise<void> {
+  private async syncAccount(input: {account: Account, pincode: string}): Promise<void> {
+    const { account, pincode } = input;
     console.log(`[account:${account.id}] Syncing nubank account...`);
 
     const [nubankCardTransactions, nubankAccountTransactions] = await Promise.all([
-      this.nubankService.getCreditCardTransactions(account),
-      this.nubankService.getAccountTransactions(account)
+      this.nubankService.getCreditCardTransactions({account, pincode}),
+      this.nubankService.getAccountTransactions({account, pincode})
     ]);
 
     const newCreditCardTransactions = nubankCardTransactions.map(cardTransactionToCreditCardTransaction(account));
