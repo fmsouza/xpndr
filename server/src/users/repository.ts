@@ -16,7 +16,7 @@ export class UsersRepository {
       data: {
         email: input.email,
         name: input.name,
-        password: input.password,
+        password: sha256(input.password),
       },
     });
   }
