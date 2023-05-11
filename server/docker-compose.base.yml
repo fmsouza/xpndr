@@ -1,14 +1,14 @@
 version: "3.9"
 services:
   db:
-    image: postgres:12
+    image: postgres:15
     restart: always
     ports:
       - 5432
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+    # environment:
+    #   - POSTGRES_USER
+    #   - POSTGRES_PASSWORD
+    #   - POSTGRES_DB
     volumes:
     - xpndr-db-data:/var/lib/postgresql
     healthcheck:
@@ -29,20 +29,20 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      - NODE_ENV
-      - PORT
-      - JWT_SECRET
-      - JWT_ALGORITHM
-      - JWT_EXPIRES_IN
-      - POSTGRES_URL
+    # environment:
+    #   - NODE_ENV
+    #   - PORT
+    #   - JWT_SECRET
+    #   - JWT_ALGORITHM
+    #   - JWT_EXPIRES_IN
+    #   - POSTGRES_URL
 
   migrate:
     user: node
     image: xpndr_backend
     command: bash -c "npm run migrate:dev"
-    environment:
-      - POSTGRES_URL
+    # environment:
+    #   - POSTGRES_URL
   
 volumes:
   xpndr-db-data:

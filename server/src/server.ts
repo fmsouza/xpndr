@@ -14,6 +14,7 @@ export async function createServer(): Promise<ApolloServer> {
       __dirname + "/**/resolvers.ts",
       __dirname + "/**/resolvers/*.ts"
     ],
+    validate: false,
     scalarsMap: scalars,
     container: Container,
     authChecker
