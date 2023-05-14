@@ -60,7 +60,7 @@ model CreditCardTransaction {
   id           Int      @id @default(autoincrement())
   externalId   String
   amount       Int
-  installments Int?
+  installments Int      @default(1)
   title        String
   category     String
   isForeign    Boolean

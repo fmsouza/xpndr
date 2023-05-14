@@ -21,7 +21,7 @@ export class CreditCardTransaction {
   @Field((_type) => ID) id: number;
   @Field((_type) => String) externalId: string;
   @Field((_type) => Number) amount: number;
-  @Field((_type) => Number, { nullable: true }) installments?: number | null;
+  @Field((_type) => Number) installments: number;
   @Field((_type) => String) title: string;
   @Field((_type) => Category) category: Category;
   @Field((_type) => Boolean) isForeign: boolean;

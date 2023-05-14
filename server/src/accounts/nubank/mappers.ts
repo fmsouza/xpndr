@@ -9,7 +9,7 @@ export function cardTransactionToCreditCardTransaction(account: Account): (trx: 
     accountId: account.id,
     externalId: trx.id,
     amount: trx.amount,
-    installments: trx.details?.charges?.count ?? null,
+    installments: trx.details?.charges?.count ?? 1,
     title: trx.description ?? 'Other',
     category: mapNubankCardCategoryToCategory(trx.title),
     isForeign: Boolean(trx.details?.fx?.exchange_rate),
