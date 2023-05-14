@@ -1,5 +1,6 @@
 import { createHash } from 'crypto';
 import AES from 'crypto-js/aes';
+import EncodingUtf8 from 'crypto-js/enc-utf8';
 import { Container } from 'typedi';
 import { SignOptions, sign, verify } from 'jsonwebtoken';
 
@@ -18,7 +19,8 @@ export function encrypt<T>(input: {contents: T, privateKey: string}): string {
 
 export function decrypt<T>(input: {contents: string, privateKey: string}): T {
   const { contents, privateKey } = input;
-  return JSON.parse(AES.decrypt(contents, privateKey).toString());
+  const decrypted = AES.decrypt(contents, privateKey).toString(EncodingUtf8);
+  return JSON.parse(decrypted);
 }
 
 export function createJwt<T>(contents: T): string {
