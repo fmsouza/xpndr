@@ -33,6 +33,8 @@ export class NubankEventListener {
       this.nubankService.getAccountTransactions({account, pincode})
     ]);
 
+    console.log(`[account:${account.id}] Found ${nubankCardTransactions.length} new credit card transactions and ${nubankAccountTransactions.length} new debit transactions.`);
+
     const newCreditCardTransactions = nubankCardTransactions.map(cardTransactionToCreditCardTransaction(account));
     const newDebitTransactions = nubankAccountTransactions.map(debitTransactionToAccountTransaction(account));
 
