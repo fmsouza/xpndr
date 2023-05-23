@@ -10,7 +10,7 @@
     "start:local": "npm run dc:local --verbose up backend",
     "lint": "eslint src",
     "migrate:dev": "prisma migrate dev",
-    "test": "exit 0"
+    "test": "jest --runInBand --detectOpenHandles --forceExit --coverage"
   },
   "dependencies": {
     "@prisma/client": "^4.14.0",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
+    "@types/jest": "^29.5.1",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/memory-cache": "^0.2.2",
     "@types/node": "^20.1.2",
@@ -41,9 +42,11 @@
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
+    "jest": "^29.5.0",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "prisma": "^4.14.0",
+    "ts-jest": "^29.1.0",
     "ts-node-dev": "^2.0.0"
   },
   "husky": {
