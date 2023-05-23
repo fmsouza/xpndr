@@ -70,11 +70,11 @@ export class NubankResolvers {
     }
     const { cert, certCrypto, authState } = await this.nubankService.verifyAccount(input);
     
-    const connectionDetails = JSON.stringify({
+    const connectionDetails = {
       cert: cert.toString('hex'),
       certCrypto: certCrypto.toString('hex'),
       authState
-    });
+    };
 
     const secureConnectionDetails = encrypt({
       contents: connectionDetails,

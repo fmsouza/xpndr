@@ -58,12 +58,10 @@ export class NubankService {
       throw new CredentialsNotFoundError(`[account:${account.id}] The credentials to access this account are not set.`);
     }
 
-    const decryptedCreds = decrypt<string>({
+    const credentials = decrypt<{cert: string, certCrypto: string, authState: any}>({
       contents: account.connectionDetails,
       privateKey: pincode
     });
-    
-    const credentials: {cert: string, certCrypto: string, authState: AuthState} = JSON.parse(decryptedCreds);
 
     const api: NubankApi = new NubankApi({
       ...credentials.authState,
@@ -78,12 +76,10 @@ export class NubankService {
       throw new CredentialsNotFoundError(`[account:${account.id}] The credentials to access this account are not set.`);
     }
 
-    const decryptedCreds = decrypt<string>({
+    const credentials = decrypt<{cert: string, certCrypto: string, authState: any}>({
       contents: account.connectionDetails,
       privateKey: pincode
     });
-    
-    const credentials: {cert: string, certCrypto: string, authState: AuthState} = JSON.parse(decryptedCreds);
 
     const api: NubankApi = new NubankApi({
       ...credentials.authState,
