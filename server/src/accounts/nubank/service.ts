@@ -85,6 +85,19 @@ export class NubankService {
       ...credentials.authState,
       cert: Buffer.from(credentials.cert, 'hex')
     });
-    return api.account.getTransactions();
+    const trxs = [];
+    let nextCursorPosition;
+    const { items, nextCursor } = await api.account.getFeedPaginated();
+    trxs.push(...items);
+    nextCursorPosition = nextCursor;
+
+    while (nextCursorPosition) {
+      const { items, nextCursor } = await api.account.getFeedPaginated(nextCursorPosition);
+      trxs.push(...items);
+      nextCursorPosition = nextCursor;
+    }
+
+    const validTrxs = trxs.filter(trx => (trx.amount ?? 0) > 0);
+    return validTrxs;
   }
 }
