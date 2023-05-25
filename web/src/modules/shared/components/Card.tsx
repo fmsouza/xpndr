@@ -8,8 +8,8 @@ const headerSX = {
 };
 
 type CardProps = {
-  border: boolean;
-  boxShadow: boolean;
+  border?: boolean;
+  boxShadow?: boolean;
   contentSX?: any;
   darkTitle?: boolean;
   elevation?: number;
@@ -17,7 +17,7 @@ type CardProps = {
   shadow?: string;
   sx?: any;
   title?: string | React.ReactNode,
-  content: boolean;
+  content?: boolean;
   children: React.ReactNode;
 };
 
