@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
-import {Loadable} from '../shared/components';
+import {Loadable} from '../modules/shared/components';
 import {MinimalLayout} from '../layouts';
 
 export const LoginRoutes: RouteObject = {

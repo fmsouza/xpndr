@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import {Card} from '../../../../shared/components';
+import {Card} from '../../../shared/components';
 
 type AuthCardProps = {
   children: React.ReactNode;

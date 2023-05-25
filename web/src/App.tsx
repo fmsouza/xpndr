@@ -1,5 +1,5 @@
 import { ThemeProvider } from './theme';
-import { ScrollTop } from './shared/components';
+import { ScrollTop } from './modules/shared/components';
 import { Routes } from './routes';
 
 export const App = () => {
