@@ -60,7 +60,7 @@ const status = [
   }
 ];
 
-export default function DashboardPage () {
+export default function AccountDashboardPage() {
   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('week');
 

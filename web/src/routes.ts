@@ -1,11 +1,11 @@
 import { useRoutes } from 'react-router-dom';
 
 import {Routes as AuthRoutes} from './modules/auth/routes';
-import {Routes as DashboardRoutes} from './modules/dashboard/routes';
+import {Routes as AccountRoutes} from './modules/account/routes';
 
 export const Routes = () => {
   return useRoutes([
     AuthRoutes,
-    DashboardRoutes,
+    AccountRoutes,
   ]);
 };

@@ -5,13 +5,13 @@ import {Loadable} from '../shared/components';
 import { MainLayout } from '../shared/layouts';
 
 export const Routes: RouteObject = {
-  path: '/',
+  path: '/account',
   element: <MainLayout />,
   children: [
     {
       path: 'dashboard',
       index: true,
-      Component: Loadable(lazy(() => import('./pages/DashboardPage'))),
+      Component: Loadable(lazy(() => import('./pages/AccountDashboardPage'))),
     }
   ]
 };
