@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { FormikHelpers, useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { strengthColor, strengthIndicator } from '../../../utils';
+import { strengthColor, strengthIndicator } from '../../utils';
 
 type RegisterFormFields = {
   firstname: string;

@@ -40,7 +40,7 @@ export const SimpleBar = ({ children, sx = {}, ...other }: SimpleBarProps) => {
   return (
     <>
       <RootStyle>
-        <SimpleBarStyle timeout={500} clickOnTrack={false} sx={sx} {...other}>
+        <SimpleBarStyle clickOnTrack={false} sx={sx} {...other}>
           {children}
         </SimpleBarStyle>
       </RootStyle>

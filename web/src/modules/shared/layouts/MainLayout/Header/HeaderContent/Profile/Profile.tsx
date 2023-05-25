@@ -21,8 +21,9 @@ import {Card} from '../../../../../components';
 import {ProfileTab} from './ProfileTab';
 import {SettingsTab} from './SettingsTab';
 
-import avatar1 from 'assets/images/users/avatar-1.png';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+// import avatar1 from 'assets/images/users/avatar-1.png';
+const avatar1 = '#';
 
 type TabPanelProps = {
   children?: React.ReactNode;
