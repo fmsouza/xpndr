@@ -1,20 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 
-function getStorageValue<T>(key: string, defaultValue: T): T {
+import { Maybe } from "../types";
+
+function getStorageValue<T>(key: string, defaultValue?: T): Maybe<T> {
   if (typeof window !== "undefined") {
-    const saved = localStorage.getItem(key);
-    const initial = saved !== null ? JSON.parse(saved) : defaultValue;
+    const saved = localStorage.getItem(key) ?? null;
+    const initial = saved !== null && saved !== undefined ? JSON.parse(saved) : defaultValue;
     return initial;
   }
-  return defaultValue;
+  return defaultValue ?? null;
 }
 
-export function useLocalStorage<T>(key: string, defaultValue?: T): [T | undefined, (value: T) => void] {
-  const [value, setValue] = useState(() => getStorageValue(key, defaultValue));
+export function useLocalStorage<T>(key: string, defaultValue: Maybe<T> = null) {
+  const [value, setValue] = useState<Maybe<T>>(() => getStorageValue(key, defaultValue));
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
+  const setItem = useCallback((newValue: T) => {
+    setValue(newValue);
+    localStorage.setItem(key, JSON.stringify(newValue));
+  }, [key]);
 
-  return [value, setValue];
+  const removeItem = useCallback(() => {
+    setValue(defaultValue);
+    localStorage.removeItem(key);
+  }, [key]);
+
+  return {
+    item: value,
+    setItem,
+    removeItem,
+  }
 };

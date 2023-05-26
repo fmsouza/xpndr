@@ -1,18 +1,19 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useLocalStorage } from "../../shared/hooks";
+import { Maybe } from "../../shared/types";
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  accessToken?: string;
-  updateToken: (token: string) => void;
+  accessToken?: Maybe<string>;
+  updateToken: (input: {token: string, persist: boolean}) => void;
   logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
-  accessToken: undefined,
+  accessToken: null,
   updateToken: () => {},
   logout: () => {}
 });
@@ -27,17 +28,22 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const navigate = useNavigate();
-  const [accessToken, setAccessToken] = useLocalStorage<string | undefined>('access_token');
+  const {item, setItem, removeItem} = useLocalStorage<Maybe<string>>('access_token', null);
+  const [accessToken, setAccessToken] = useState<Maybe<string>>(item);
 
-  const isAuthenticated = !!accessToken;
+  const isAuthenticated = Boolean(accessToken);
 
-  const updateToken = async (token: string) => {
-    setAccessToken(token);
+  const updateToken = async (input: {token: string, persist: boolean}) => {
+    if (input.persist) {
+      setItem(input.token);
+    }
+    setAccessToken(input.token);
     navigate('/account/dashboard');
   };
 
   const logout = () => {
-    setAccessToken(undefined);
+    removeItem();
+    setAccessToken(null);
     navigate('/');
   };
 

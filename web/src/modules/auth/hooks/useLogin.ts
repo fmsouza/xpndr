@@ -16,9 +16,12 @@ export const useLogin = () => {
   const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
   const handleLogin = useCallback(
-    async (variables: { email: string; password: string }) => {
+    async (variables: { email: string; password: string, keepMeSignedIn: boolean }) => {
       const response = await login({ variables });
-      updateToken(response.data?.login?.accessToken);
+      updateToken({
+        token: response.data?.login?.accessToken,
+        persist: variables.keepMeSignedIn,
+      });
       return response;
     },
     [login],
