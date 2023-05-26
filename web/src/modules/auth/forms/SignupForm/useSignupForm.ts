@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import { strengthColor, strengthIndicator } from '../../utils';
 
-type RegisterFormFields = {
+type SignupFormFields = {
   firstname: string;
   lastname: string;
   email: string;
@@ -12,7 +12,7 @@ type RegisterFormFields = {
   submit: null | Error;
 };
 
-const INITIAL_FORM_VALUES: RegisterFormFields = {
+const INITIAL_FORM_VALUES: SignupFormFields = {
   firstname: '',
   lastname: '',
   email: '',
@@ -25,9 +25,9 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().max(255).required('Password is required')
 });
 
-export const useRegisterForm = () => {
+export const useSignupForm = () => {
   const [passwordLevel, setPasswordLevel] = useState<{ label: string, color: string } | undefined>(undefined);
-  const handleSubmit = useCallback(async (values: RegisterFormFields, { setErrors, setStatus, setSubmitting }: FormikHelpers<RegisterFormFields>) => {
+  const handleSubmit = useCallback(async (values: SignupFormFields, { setErrors, setStatus, setSubmitting }: FormikHelpers<SignupFormFields>) => {
     try {
       setStatus({ success: false });
       setSubmitting(false);

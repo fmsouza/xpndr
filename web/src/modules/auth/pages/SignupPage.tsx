@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { Grid, Stack, Typography } from '@mui/material';
 
 import {AuthLayout} from '../layouts';
-import { RegisterForm } from '../forms';
+import { SignupForm } from '../forms';
 
 
-export default function RegisterPage() {
+export default function SignupPage() {
   return (
     <AuthLayout>
     <Grid container spacing={3}>
@@ -18,7 +18,7 @@ export default function RegisterPage() {
         </Stack>
       </Grid>
       <Grid item xs={12}>
-        <RegisterForm />
+        <SignupForm />
       </Grid>
     </Grid>
     </AuthLayout>

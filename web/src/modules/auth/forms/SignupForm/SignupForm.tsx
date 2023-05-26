@@ -16,10 +16,10 @@ import {
   Typography
 } from '@mui/material';
 
-import { useRegisterForm } from './useRegisterForm';
+import { useSignupForm } from './useSignupForm';
 
-export const RegisterForm = () => {
-  const {form, passwordLevel, handleChangePassword} = useRegisterForm();
+export const SignupForm = () => {
+  const {form, passwordLevel, handleChangePassword} = useSignupForm();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {

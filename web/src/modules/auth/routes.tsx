@@ -13,7 +13,7 @@ export const Routes: RouteObject = {
     },
     {
       path: 'register',
-      Component: Loadable(lazy(() => import('./pages/RegisterPage'))),
+      Component: Loadable(lazy(() => import('./pages/SignupPage'))),
     }
   ]
 };
