@@ -1,12 +1,11 @@
 import { lazy } from 'react';
-import { RouteObject } from 'react-router-dom';
+import { Outlet, RouteObject } from 'react-router-dom';
 
 import {Loadable} from '../shared/components';
-import {MinimalLayout} from '../shared/layouts';
 
 export const Routes: RouteObject = {
-  path: '/',
-  element: <MinimalLayout />,
+  path: '/auth',
+  element: <Outlet />,
   children: [
     {
       path: 'login',
