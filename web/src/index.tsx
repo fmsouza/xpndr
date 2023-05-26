@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import {App} from './App';
+import { ThemeProvider } from './theme';
+import { Routes } from './routes';
 import reportWebVitals from './reportWebVitals';
+import { ScrollTop } from './modules/shared/components';
+import { AuthProvider } from './modules/auth/providers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +14,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter basename="/">
-      <App />
+      <ThemeProvider>
+        <ScrollTop>
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
+        </ScrollTop>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
