@@ -36,7 +36,7 @@ export const useLoginForm = () => {
       setErrors({ submit: _err.message });
       setSubmitting(false);
     }
-  }, []);
+  }, [login]);
   
   const form = useFormik({
     initialValues: INITIAL_FORM_VALUES,
