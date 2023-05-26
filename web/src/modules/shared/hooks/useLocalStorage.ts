@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
-
-import { Maybe } from "../types";
+import { Maybe } from 'yup';
 
 function getStorageValue<T>(key: string, defaultValue?: T): Maybe<T> {
   if (typeof window !== "undefined") {

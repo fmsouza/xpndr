@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Maybe } from 'yup';
 
 import { useLocalStorage } from "../../shared/hooks";
-import { Maybe } from "../../shared/types";
 
 type AuthContextType = {
   isAuthenticated: boolean;

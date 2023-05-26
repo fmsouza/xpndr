@@ -1,8 +1,7 @@
 import { ApolloClient, InMemoryCache, from } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BatchHttpLink } from '@apollo/client/link/batch-http';
-
-import { Maybe } from './modules/shared/types';
+import { Maybe } from 'yup';
 
 const httpLink = new BatchHttpLink({
   uri: process.env.REACT_APP_API_URL,
