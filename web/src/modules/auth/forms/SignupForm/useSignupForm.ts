@@ -3,6 +3,7 @@ import { FormikHelpers, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { strengthColor, strengthIndicator } from '../../utils';
+import { useSignup } from '../../hooks';
 
 type SignupFormFields = {
   firstname: string;
@@ -26,18 +27,24 @@ const validationSchema = Yup.object().shape({
 });
 
 export const useSignupForm = () => {
+  const {signup} = useSignup();
   const [passwordLevel, setPasswordLevel] = useState<{ label: string, color: string } | undefined>(undefined);
   const handleSubmit = useCallback(async (values: SignupFormFields, { setErrors, setStatus, setSubmitting }: FormikHelpers<SignupFormFields>) => {
     try {
       setStatus({ success: false });
       setSubmitting(false);
+      await signup({
+        email: values.email,
+        password: values.password,
+        name: `${values.firstname} ${values.lastname}`,
+      });
     } catch (err) {
       const _err = err as Error;
       setStatus({ success: false });
       setErrors({ submit: _err.message });
       setSubmitting(false);
     }
-  }, []);
+  }, [signup]);
 
   const handleChangePassword = useCallback((value: any) => {
     const temp = strengthIndicator(value);
