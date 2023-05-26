@@ -21,7 +21,7 @@ export function useLocalStorage<T>(key: string, defaultValue: Maybe<T> = null) {
   const removeItem = useCallback(() => {
     setValue(defaultValue);
     localStorage.removeItem(key);
-  }, [key]);
+  }, [key, defaultValue]);
 
   return {
     item: value,
