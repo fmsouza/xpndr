@@ -12,7 +12,7 @@ export default function SignupPage() {
       <Grid item xs={12}>
         <Stack direction="row" justifyContent="space-between" alignItems="baseline" sx={{ mb: { xs: -0.5, sm: 0.5 } }}>
           <Typography variant="h3">Sign up</Typography>
-          <Typography component={Link} to="/login" variant="body1" sx={{ textDecoration: 'none' }} color="primary">
+          <Typography component={Link} to="/auth/login" variant="body1" sx={{ textDecoration: 'none' }} color="primary">
             Already have an account?
           </Typography>
         </Stack>

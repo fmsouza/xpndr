@@ -12,7 +12,7 @@ export const Routes: RouteObject = {
       Component: Loadable(lazy(() => import('./pages/LoginPage'))),
     },
     {
-      path: 'register',
+      path: 'signup',
       Component: Loadable(lazy(() => import('./pages/SignupPage'))),
     }
   ]
