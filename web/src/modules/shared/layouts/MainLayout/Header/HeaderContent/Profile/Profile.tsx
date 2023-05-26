@@ -22,6 +22,7 @@ import {ProfileTab} from './ProfileTab';
 import {SettingsTab} from './SettingsTab';
 
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { useAuth } from '../../../../../../auth/hooks';
 // import avatar1 from 'assets/images/users/avatar-1.png';
 const avatar1 = '#';
 
@@ -49,10 +50,7 @@ function a11yProps(index: number) {
 
 export const Profile = () => {
   const theme = useTheme();
-
-  const handleLogout = async () => {
-    // logout
-  };
+  const {logout: handleLogout} = useAuth();
 
   const anchorRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
