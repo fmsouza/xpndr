@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import {
   Avatar,
   Box,
@@ -16,13 +17,12 @@ import {
   Typography
 } from '@mui/material';
 
+import { useAuth, useMe } from '../../../../../../auth/hooks';
 import {Card} from '../../../../../components';
 
 import {ProfileTab} from './ProfileTab';
 import {SettingsTab} from './SettingsTab';
 
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { useAuth } from '../../../../../../auth/hooks';
 // import avatar1 from 'assets/images/users/avatar-1.png';
 const avatar1 = '#';
 
@@ -51,6 +51,7 @@ function a11yProps(index: number) {
 export const Profile = () => {
   const theme = useTheme();
   const {logout: handleLogout} = useAuth();
+  const {me} = useMe();
 
   const anchorRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
@@ -89,8 +90,8 @@ export const Profile = () => {
         onClick={handleToggle}
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
-          <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">John Doe</Typography>
+          <Avatar alt={me?.name} src={avatar1} sx={{ width: 32, height: 32 }} />
+          <Typography variant="subtitle1">{me?.name}</Typography>
         </Stack>
       </ButtonBase>
       <Popper
@@ -129,11 +130,11 @@ export const Profile = () => {
                   <Grid container justifyContent="space-between" alignItems="center">
                     <Grid item>
                       <Stack direction="row" spacing={1.25} alignItems="center">
-                        <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
+                        <Avatar alt={me?.name} src={avatar1} sx={{ width: 32, height: 32 }} />
                         <Stack>
-                          <Typography variant="h6">John Doe</Typography>
+                          <Typography variant="h6">{me?.name}</Typography>
                           <Typography variant="body2" color="textSecondary">
-                            UI/UX Designer
+                            {me?.email}
                           </Typography>
                         </Stack>
                       </Stack>
