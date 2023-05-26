@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from './theme';
-import { Routes } from './routes';
 import reportWebVitals from './reportWebVitals';
 import { ScrollTop } from './modules/shared/components';
 import { AuthProvider } from './modules/auth/providers';
+import { App } from './App';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +17,7 @@ root.render(
       <ThemeProvider>
         <ScrollTop>
           <AuthProvider>
-            <Routes />
+            <App />
           </AuthProvider>
         </ScrollTop>
       </ThemeProvider>

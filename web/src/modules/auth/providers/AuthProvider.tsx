@@ -5,14 +5,16 @@ import { useLocalStorage } from "../../shared/hooks";
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  onLogin: () => void;
-  onLogout: () => void;
+  accessToken?: string;
+  updateToken: (token: string) => void;
+  logout: () => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
-  onLogin: () => {},
-  onLogout: () => {}
+  accessToken: undefined,
+  updateToken: () => {},
+  logout: () => {}
 });
 
 export const useAuth = () => {
@@ -25,27 +27,25 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const navigate = useNavigate();
-  const [token, setToken] = useLocalStorage<string | null>('access_token', null);
+  const [accessToken, setAccessToken] = useLocalStorage<string | undefined>('access_token');
 
-  const isAuthenticated = !!token;
+  const isAuthenticated = !!accessToken;
 
-  const onLogin = async () => {
-    // const token = await fakeAuth();
-    // setToken(token);
-
-    setToken('token');
-    navigate('/dashboard');
+  const updateToken = async (token: string) => {
+    setAccessToken(token);
+    navigate('/account/dashboard');
   };
 
-  const onLogout = () => {
-    setToken(null);
+  const logout = () => {
+    setAccessToken(undefined);
     navigate('/');
   };
 
   const value = {
     isAuthenticated,
-    onLogin,
-    onLogout,
+    accessToken,
+    updateToken,
+    logout,
   };
 
   return (

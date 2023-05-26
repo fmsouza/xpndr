@@ -2,6 +2,8 @@ import { FormikHelpers, useFormik } from 'formik';
 import { useCallback } from 'react';
 import * as Yup from 'yup';
 
+import { useLogin } from '../../hooks';
+
 type LoginFormFields = {
   email: string;
   password: string;
@@ -22,10 +24,12 @@ const validationSchema = Yup.object().shape({
 });
 
 export const useLoginForm = () => {
+  const { login } = useLogin();
   const handleSubmit = useCallback(async (values: LoginFormFields, { setErrors, setStatus, setSubmitting }: FormikHelpers<LoginFormFields>) => {
     try {
       setStatus({ success: false });
       setSubmitting(false);
+      await login(values);
     } catch (err) {
       const _err = err as Error;
       setStatus({ success: false });
